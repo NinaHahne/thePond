@@ -1,10 +1,9 @@
 import React from 'react';
-// import axios from 'axios';
 // axios copy including csrf token:
 import axios from './axios';
 import { Link } from 'react-router-dom';
 
-export default class Registration extends React.Component {
+export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -16,9 +15,7 @@ export default class Registration extends React.Component {
         });
     }
     submit() {
-        axios.post('/register', {
-            first: this.state.first,
-            last: this.state.last,
+        axios.post('/login', {
             email: this.state.email,
             password: this.state.password
         }).then(({data}) => {
@@ -32,22 +29,17 @@ export default class Registration extends React.Component {
                 });
             }
         });
-        // or:
-        // axios.post('/register', this.state);
     }
     render() {
         return (
             <div>
                 {this.state.error && <div className="error">Oops!</div>}
-                <input name="first" placeholder="first" onChange={e => this.handleChange(e)} />
-                <input name="last" placeholder="last" onChange={e => this.handleChange(e)}/>
                 <input name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
                 <input type="password" name="password" placeholder="password" onChange={e => this.handleChange(e)}/>
-                <button onClick={e => this.submit()}>register</button>
+                <button onClick={e => this.submit()}>hop in</button>
 
                 {/*<p>Already a member? <a href="#">Log in</a></p>*/}
-                <p>Already a member? <Link to="/login">Log in</Link> </p>
-
+                <p>Not a member yet? <Link to="/">register</Link> </p>
 
             </div>
         );

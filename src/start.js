@@ -20,6 +20,7 @@ if (location.pathname == '/welcome') {
     elem =
     <div className="logo-small">
         <img src="/images/thePond.svg" alt="thePond"/>
+        <p><a href="/logout">hop out</a></p>
     </div>;
 }
 
