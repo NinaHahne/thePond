@@ -9,15 +9,18 @@ const csurf = require("csurf");
 // for log in:
 const { hash, compare } = require("./bcrypt");
 
-let secrets;
+// for resetting a password:
+const cryptoRandomString = require("crypto-random-string");
+const { sendEmail } = require("./ses");
 
+let secrets;
 if (process.env.NODE_ENV === "production") {
     secrets = process.env;
 } else {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser } = require("./db");
+const { addUser, getUser, addCode, getCode, setNewPassword } = require("./db");
 
 app.use(helmet());
 
@@ -133,7 +136,6 @@ app.post("/login", (req, res) => {
                     res.json({
                         success: true
                     });
-
                 } else {
                     // if password wrong:
                     let loginErr = "wrong password or email!";
@@ -146,6 +148,100 @@ app.post("/login", (req, res) => {
         })
         .catch(err => {
             console.log("err in /login: ", err);
+            res.json({
+                success: false
+            });
+        });
+});
+
+app.post("/reset/start", (req, res) => {
+    console.log("*************** /reset/start POST ***********");
+    getUser(req.body.email)
+        .then(result => {
+            // console.log('result.length: ', result.length);
+            if (result.length != 0) {
+                const secretCode = cryptoRandomString({
+                    length: 6
+                });
+                console.log("not so secretCode: ", secretCode);
+                // SEND EMAIL WITH SECRET CODE:
+                let recipient = req.body.email;
+                let message = "here is your secret code to reset your password: "+secretCode;
+                let subject = "resetting your password";
+                sendEmail(recipient, message, subject);
+
+                addCode(req.body.email, secretCode)
+                    .then(result => {
+                        res.json({
+                            success: true
+                        });
+                    })
+                    .catch(err => {
+                        console.log(
+                            "err in addCode() /reset/start POST: ",
+                            err
+                        );
+                        res.json({
+                            success: false
+                        });
+                    });
+            } else {
+                res.json({
+                    success: false
+                });
+            }
+        })
+        .catch(err => {
+            console.log("err in getUser() in /reset/start: ", err);
+            res.json({
+                success: false
+            });
+        });
+});
+
+app.post("/reset/verify", (req, res) => {
+    console.log("*************** /reset/verify POST ***********");
+    getCode(req.body.email)
+        .then(result => {
+            // console.log('result.length: ', result.length);
+            if (result.length != 0) {
+                console.log('code we sent you: ', result[0].code);
+                console.log('the code you typed in: ', req.body.code);
+                console.log('your new password: ', req.body.password);
+                if (result[0].code == req.body.code) {
+                    // SET NEW PASSWORD HERE:
+                    hash(req.body.password).then(password => {
+                        setNewPassword(req.body.email, password).then(() => {
+                            console.log('successfully changed password');
+                            res.json({
+                                success: true
+                            });
+                        }).catch(err => {
+                            console.log("err in setNewPassword() in /reset/verify: ", err);
+                            res.json({
+                                success: false
+                            });
+                        });
+                    }).catch(err => {
+                        console.log("err in hash(password) in /reset/verify: ", err);
+                        res.json({
+                            success: false
+                        });
+                    });
+
+                } else {
+                    res.json({
+                        success: false
+                    });
+                }
+            } else {
+                res.json({
+                    success: false
+                });
+            }
+        })
+        .catch(err => {
+            console.log("err in getUser() in /reset/verify: ", err);
             res.json({
                 success: false
             });

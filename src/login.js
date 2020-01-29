@@ -40,6 +40,7 @@ export default class Login extends React.Component {
 
                 {/*<p>Already a member? <a href="#">Log in</a></p>*/}
                 <p>Not a member yet? <Link to="/">register</Link> </p>
+                <p>Forgot your password? <Link to="/reset">Reset password</Link> </p>
 
             </div>
         );
