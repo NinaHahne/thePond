@@ -1,11 +1,55 @@
 * {
-    background-color: powderblue;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Changa', sans-serif;
+    color: rgb(2, 17, 56);
 }
 
-.logo-small {
+html, body, main {
+    height: 100%;
+    width: 100%;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    background-color: powderblue;
+    color: rgb(2, 17, 56);
+}
+
+/* logged in components: */
+header {
+    display: flex;
+    height: 150px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-small, .profile-pic {
     height: 100px;
 }
 
-.logo-small img {
+.logo-small img, .profile-pic img {
     height: 100%;
+}
+
+/* logged out components: */
+.welcome {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+    padding-top: 150px;
+}
+
+.logo-big {
+    text-align: center;
+}
+
+.register, .login, .reset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

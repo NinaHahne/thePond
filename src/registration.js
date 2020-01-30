@@ -15,7 +15,8 @@ export default class Registration extends React.Component {
             [e.target.name]: e.target.value
         });
     }
-    submit() {
+    submit(e) {
+        e.preventDefault();
         axios.post('/register', {
             first: this.state.first,
             last: this.state.last,
@@ -37,13 +38,13 @@ export default class Registration extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="register">
                 {this.state.error && <div className="error">Oops!</div>}
                 <input name="first" placeholder="first" onChange={e => this.handleChange(e)} />
                 <input name="last" placeholder="last" onChange={e => this.handleChange(e)}/>
                 <input name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
                 <input type="password" name="password" placeholder="password" onChange={e => this.handleChange(e)}/>
-                <button onClick={e => this.submit()}>register</button>
+                <button onClick={e => this.submit(e)}>register</button>
 
                 {/*<p>Already a member? <a href="#">Log in</a></p>*/}
                 <p>Already a member? <Link to="/login">Log in</Link> </p>

@@ -19,12 +19,32 @@ exports.getUser = function(email) {
         .then(({ rows }) => rows);
 };
 
+exports.addImage = function(email, imageUrl) {
+    return db.query(
+        `UPDATE users
+        SET img_url = $2
+        WHERE email = $1`,
+        [email, imageUrl]
+    );
+};
+
 exports.addCode = function(email, code) {
     return db
         .query(`INSERT INTO codes (email, code)
         VALUES ($1, $2) RETURNING id`, [email, code])
         .then(({ rows }) => rows);
 };
+
+// HOW TO UPDATE THE TIMESTAMP in upsert query? --> use now():
+// exports.addCode = function(email, code) {
+//     return db.query(
+//         `INSERT INTO codes (email, code)
+//         VALUES ($1, $2)
+//         ON CONFLICT (email)
+//         DO UPDATE SET code = $2 created_at = now()`,
+//         [email, code]
+//     );
+// };
 
 exports.getCode = function(email) {
     return db
@@ -44,13 +64,3 @@ exports.setNewPassword = function(email, password) {
         [email, password]
     );
 };
-
-// exports.upsertProfile = function(age, city, url, user_id) {
-//     return db.query(
-//         `INSERT INTO users (age, city, url, user_id)
-//         VALUES ($1, $2, $3, $4)
-//         ON CONFLICT (user_id)
-//         DO UPDATE SET age = $1, city = $2, url = $3`,
-//         [age, city, url, user_id]
-//     );
-// };

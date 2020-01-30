@@ -20,13 +20,41 @@ if (process.env.NODE_ENV === "production") {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser, addCode, getCode, setNewPassword } = require("./db");
+const { addUser, getUser, addImage, addCode, getCode, setNewPassword } = require("./db");
 
 app.use(helmet());
+
+// for uploading profile pics:
+const s3 = require("./s3");
+const { s3Url } = require("./config");
 
 app.use(express.static("./public"));
 
 app.use(express.json());
+
+// ///////// BOILERPLATE CODE FOR IMAGE UPLOAD ///// DO NOT TOUCH /////////
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
+
+const diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+// /////////////////////////////////////////////////////////////////
 
 // middleware function, that grabs user input, parses it and makes it available to req.body:
 app.use(
@@ -68,6 +96,49 @@ if (process.env.NODE_ENV != "production") {
 } else {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
+// ///////////////////////////////////////////////////////
+app.get("/user", (req, res) => {
+    console.log("*************** /user ***********");
+    // console.log('req.session in get /user: ', req.session);
+    getUser(req.session.email).then(rows => {
+        // check if rows[0].length != 0;
+        res.json({
+            success: true,
+            userId: rows[0].id,
+            first: rows[0].first,
+            last: rows[0].last,
+            imageUrl: rows[0].img_url || '/images/duck-308733.svg',
+            bio: rows[0].bio || 'no bio yet'
+        });
+    }).catch(err => {
+        console.log("err in GET /user : ", err);
+        res.json({
+            success: false
+        });
+    });
+});
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    console.log("*************** POST /upload ***********");
+    const imageUrl = s3Url + req.file.filename;
+    // url of image: https://s3.amazonaws.com/name-of-bucket/filename
+    console.log('req.session.email: ', req.session.email);
+    addImage(req.session.email, imageUrl)
+        .then(image => {
+            // console.log('image after addImage(): ', image);
+            // after query is successful, send a response
+            res.json({
+                success: true,
+                imageUrl: imageUrl
+            });
+        })
+        .catch(err => {
+            console.log("err in POST /upload", err);
+            res.json({
+                success: false
+            });
+        });
+});
 
 app.get("/logout", (req, res) => {
     console.log("*************** /logout ***********");
@@ -107,12 +178,32 @@ app.post("/register", (req, res) => {
             });
         })
         .catch(err => {
-            console.log("err in /register POST: ", err);
+            console.log("err in POST /register: ", err);
             res.json({
                 success: false
             });
         });
 });
+
+// same with asynch (actually not really the same yet.. work on that later...):
+// app.post("/register", async (req, res) => {
+//     const {first, last, email, password} = req.body;
+//
+//     try {
+//         let hash = await hash(password);
+//         let id = await addUser(first, last, email, hash);
+//
+//         req.session.userId = id;
+//         res.json({
+//             success: true
+//         });
+//     } catch (err) {
+//         console.log("err in POST /register: ", err);
+//         res.json({
+//             success: false
+//         });
+//     }
+// });
 
 app.post("/login", (req, res) => {
     console.log("*************** /login POST ***********");
@@ -133,6 +224,7 @@ app.post("/login", (req, res) => {
                     req.session.userId = userId;
                     req.session.first = first;
                     req.session.last = last;
+                    req.session.email = req.body.email;
                     res.json({
                         success: true
                     });
@@ -171,7 +263,7 @@ app.post("/reset/start", (req, res) => {
                 sendEmail(recipient, message, subject);
 
                 addCode(req.body.email, secretCode)
-                    .then(result => {
+                    .then(() => {
                         res.json({
                             success: true
                         });

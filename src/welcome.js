@@ -13,17 +13,15 @@ import { HashRouter, Route } from "react-router-dom";
 export default function Welcome() {
     return (
         <HashRouter>
-            <div>
-                <div className="welcome">
-                    <img src="/images/welcome-to_2.svg" alt="welcome to"></img>
-                    <img src="/images/thePond.svg" alt="thePond"></img>
+            <div className="welcome">
+                <div className="logo-big">
+                    <h1>welcome to</h1>
+                    <img src="/images/thePond_2.svg" alt="thePond"></img>
                 </div>
-                <div>
-                    <div>
-                        <Route exact path="/" component={Registration} />
-                        <Route exact path="/login" component={Login} />
-                        <Route path="/reset" component={ResetPassword} />
-                    </div>
+                <div className="auth">
+                    <Route exact path="/" component={Registration} />
+                    <Route exact path="/login" component={Login} />
+                    <Route path="/reset" component={ResetPassword} />
                 </div>
             </div>
         </HashRouter>

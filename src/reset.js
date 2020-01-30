@@ -19,31 +19,36 @@ export default class ResetPassword extends React.Component {
     getCurrentDisplay() {
         if (this.state.step == "start") {
             return (
-                <div>
+                <div className="reset">
+                    <h2>Reset Password</h2>
                     {this.state.error && <div className="error">Oops!</div>}
                     <input name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
-                    <button onClick={e => this.submit()}>submit</button>
+                    <button onClick={() => this.submit()}>submit</button>
+                    <p>Actually remembering your password? <Link to="/login">log in</Link></p>
                 </div>
             );
         } else if (this.state.step == "verify") {
             return (
-                <div>
+                <div className="reset">
+                    <h2>Reset Password</h2>
                     {this.state.error && <div className="error">Oops!</div>}
                     <input key="code" name="code" placeholder="code" autoComplete="off" onChange={e => this.handleChange(e)}/>
                     <input type="password" name="password" placeholder="new password" onChange={e => this.handleChange(e)}/>
-                    <button onClick={e => this.submit()}>submit</button>
+                    <button onClick={(e) => this.submit(e)}>submit</button>
                 </div>
             );
         } else if (this.state.step == "confirmed") {
             return (
-                <div>
+                <div className="reset">
+                    <h2>Reset Password</h2>
                     <p>Success!</p>
                     <p>You can now <Link to="/login">log in</Link> with your new password</p>
                 </div>
             );
         }
     }
-    submit() {
+    submit(e) {
+        e.preventDefault();
         if (this.state.step == "start") {
             axios.post('/reset/start', {
                 email: this.state.email
@@ -84,10 +89,10 @@ export default class ResetPassword extends React.Component {
     render() {
         // console.log(this.state);
         return (
-            <div>
-                <p>Reset Password</p>
-                {this.getCurrentDisplay()}
-            </div>
+            this.getCurrentDisplay()
+            // <div className="reset">
+            //     <p>Reset Password</p>
+            // </div>
         );
     }
 }

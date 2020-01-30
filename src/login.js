@@ -14,7 +14,8 @@ export default class Login extends React.Component {
             [e.target.name]: e.target.value
         });
     }
-    submit() {
+    submit(e) {
+        e.preventDefault();
         axios.post('/login', {
             email: this.state.email,
             password: this.state.password
@@ -32,11 +33,11 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="login">
                 {this.state.error && <div className="error">Oops!</div>}
                 <input name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
                 <input type="password" name="password" placeholder="password" onChange={e => this.handleChange(e)}/>
-                <button onClick={e => this.submit()}>hop in</button>
+                <button onClick={e => this.submit(e)}>hop in</button>
 
                 {/*<p>Already a member? <a href="#">Log in</a></p>*/}
                 <p>Not a member yet? <Link to="/">register</Link> </p>
