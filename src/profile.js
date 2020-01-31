@@ -13,6 +13,7 @@ export default function Profile(props) {
                 last={props.last}
             />
             <BioEditor
+                userId={props.userId}
                 first={props.first}
                 last={props.last}
                 bio={props.bio}

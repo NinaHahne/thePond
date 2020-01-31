@@ -5,7 +5,8 @@ export default class BioEditor extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            editingMode: false
+            editingMode: false,
+            bio: this.props.bio
         };
     }
     handleChange(e) {
@@ -19,42 +20,22 @@ export default class BioEditor extends React.Component {
 
     saveBio(e) {
         e.preventDefault();
-        this.props.setBio(this.state.bio);
-        this.setState({editingMode: false});
+        axios.post('/bio/edit', {
+            userId: this.props.userId,
+            bio: this.state.bio
+        }).then(({data}) => {
+            if (data.success) {
+                this.props.setBio(this.state.bio);
+                this.setState({editingMode: false});
+            } else {
+                this.setState({
+                    error: true
+                });
+            }
+        }).catch(err => {
+            console.log('err in /bio/edit in bioeditor.js: ', err);
+        });
     }
-
-    // render() {
-    //
-    //     let editElem =
-    //     <div className="editing-bio">
-    //         <textarea id="edit-bio" name="bio" onChange={e => this.handleChange(e)} defaultValue={this.props.bio}></textarea>
-    //         {/* <button onClick={this.props.setBio(this.state.bio)}>Save</button> */}
-    //         <button onClick={e => this.saveBio(e)}>Save</button>
-    //     </div>;
-    //
-    //     let noBioElem =
-    //     <div>
-    //         <p>{props.bio}</p>
-    //         <button onClick={() => this.setState({editingMode: true})}>Add Bio</button>
-    //     </div>;
-    //
-    //     let bioElem =
-    //     <div>
-    //         <p>{props.bio}</p>
-    //         <button onClick={() => this.setState({editingMode: true})}>Edit Bio</button>
-    //     </div>;
-    //
-    //     let returnElement;
-    //     if (this.props.bio != '') {
-    //         returnElement = bioElem
-    //     }
-    //
-    //
-    //     return (
-    //         <h2>{props.first} {props.last}</h2>
-    //         returnElement
-    //     );
-    // }
 
     render() {
         let editElem =
@@ -85,22 +66,4 @@ export default class BioEditor extends React.Component {
             </div>
         );
     }
-    // render() {
-    //     return (
-    //         <h2>{props.first} {props.last}</h2>
-    //         {this.props.bio && <div>
-    //             <p>{props.bio}</p>
-    //             <button onClick={() => this.setState({editingMode: true})}>Edit Bio</button>
-    //         </div>}
-    //         {!this.props.bio && <div>
-    //             <p>{props.bio}</p>
-    //             <button onClick={() => this.setState({editingMode: true})}>Add Bio</button>
-    //         </div>}
-    //         {this.state.editingMode && <div className="editing-bio">
-    //             <textarea id="edit-bio" name="bio" onChange={e => this.handleChange(e)} defaultValue={this.props.bio}></textarea>
-    //             {/* <button onClick={this.props.setBio(this.state.bio)}>Save</button> */}
-    //             <button onClick={e => this.saveBio(e)}>Save</button>
-    //         </div>}
-    //     );
-    // }
 }

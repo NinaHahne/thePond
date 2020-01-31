@@ -45,19 +45,20 @@ export default class App extends React.Component {
                         <img src="/images/thePond_3.svg" alt="thePond"/>
                         <p><a href="/logout">hop out</a></p>
                     </div>
-                    <ProfilePic
-                        clickHandler={() => this.setState({uploaderIsVisible: true})}
-                        imageUrl={this.state.imageUrl}
-                        first={this.state.first}
-                        last={this.state.last}
-                    />
                     {this.state.uploaderIsVisible && <Uploader
                         // setImageUrl={imageUrl => this.setState({imageUrl})}
                         setImageUrl={imageUrl => this.setState({
                             imageUrl: imageUrl,
                             uploaderIsVisible: false
                         })}
+                        closeUploader={() => this.setState({uploaderIsVisible: false})}
                     />}
+                    <ProfilePic
+                        clickHandler={() => this.setState({uploaderIsVisible: true})}
+                        imageUrl={this.state.imageUrl}
+                        first={this.state.first}
+                        last={this.state.last}
+                    />
                 </header>
                 <Profile
                     userId={this.state.userId}

@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser, addImage, addCode, getCode, setNewPassword } = require("./db");
+const { addUser, getUser, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
 
 app.use(helmet());
 
@@ -334,6 +334,22 @@ app.post("/reset/verify", (req, res) => {
         })
         .catch(err => {
             console.log("err in getUser() in /reset/verify: ", err);
+            res.json({
+                success: false
+            });
+        });
+});
+
+app.post("/bio/edit", (req, res) => {
+    console.log("*************** /POST /bio/edit ***********");
+    editBio(req.body.userId, req.body.bio)
+        .then(() => {
+            res.json({
+                success: true,
+            });
+        })
+        .catch(err => {
+            console.log("err in editBio(): ", err);
             res.json({
                 success: false
             });

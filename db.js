@@ -64,3 +64,12 @@ exports.setNewPassword = function(email, password) {
         [email, password]
     );
 };
+
+exports.editBio = function(userId, bio) {
+    return db.query(
+        `UPDATE users
+        SET bio = $2
+        WHERE id = $1`,
+        [userId, bio]
+    );
+};
