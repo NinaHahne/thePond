@@ -108,7 +108,7 @@ app.get("/user", (req, res) => {
             first: rows[0].first,
             last: rows[0].last,
             imageUrl: rows[0].img_url || '/images/duck-308733.svg',
-            bio: rows[0].bio || 'no bio yet'
+            bio: rows[0].bio || ''
         });
     }).catch(err => {
         console.log("err in GET /user : ", err);
