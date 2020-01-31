@@ -1,7 +1,9 @@
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Changa', sans-serif;
+    /* font-family: 'Changa', sans-serif; */
+    font-family: 'Amatic SC', cursive;
+    font-size: 28px;
     color: rgb(2, 17, 56);
 }
 
@@ -43,8 +45,16 @@ header {
     padding-top: 150px;
 }
 
+h1 {
+    font-size: 40px;
+}
+
 .logo-big {
     text-align: center;
+}
+
+.auth * {
+    font-size: 22px;
 }
 
 .register, .login, .reset {

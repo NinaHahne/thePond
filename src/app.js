@@ -30,7 +30,7 @@ export default class App extends React.Component {
         return (
             <header>
                 <div className="logo-small">
-                    <img src="/images/thePond_2.svg" alt="thePond"/>
+                    <img src="/images/thePond_3.svg" alt="thePond"/>
                     <p><a href="/logout">hop out</a></p>
                 </div>
                 <ProfilePic

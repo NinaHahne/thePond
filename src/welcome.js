@@ -16,7 +16,7 @@ export default function Welcome() {
             <div className="welcome">
                 <div className="logo-big">
                     <h1>welcome to</h1>
-                    <img src="/images/thePond_2.svg" alt="thePond"></img>
+                    <img src="/images/thePond_3.svg" alt="thePond"></img>
                 </div>
                 <div className="auth">
                     <Route exact path="/" component={Registration} />
