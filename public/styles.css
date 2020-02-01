@@ -25,13 +25,13 @@ header {
     height: 150px;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
 }
 
 .profile {
     display: flex;
     margin-top: 50px;
-    padding: 0 20px;
+    padding: 0 30px;
 }
 
 .logo-small, .profile-pic {
@@ -44,15 +44,52 @@ header {
 
 .profile .profile-pic {
     height: 150px;
+    margin-right: 20px;
+}
+
+.profile-pic img:hover {
+    cursor: pointer;
+}
+
+.uploader-box {
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+    position: absolute;
+    top: 150px;
+    left: 0;
+}
+
+.uploader {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(2, 17, 56);
+    border-radius: 10px;
+    background-color: powderblue;
+    padding: 10px;
+    width: 60%;
+    min-width: 300px;
 }
 
 .closeX {
+    position: absolute;
+    top: 4px;
+    right: 4px;
     width: 15px;
     font-weight: bold;
+    align-self: flex-end;
+    color: grey;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
 .closeX:hover {
     cursor: pointer;
+    color: rgb(2, 17, 56);
 }
 
 /* logged out components: */
@@ -73,13 +110,83 @@ h1 {
     text-align: center;
 }
 
-.auth * {
-    font-size: 22px;
-}
-
 .register, .login, .reset {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+/* ********INPUTS & BUTTONS********** */
+a, button {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+a {
+    text-decoration: underline wavy;
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.input {
+    background-color: powderblue;
+    color: rgb(2, 17, 56);
+    font-size: 28px;
+    border-radius: 6px;
+    padding: 3px 6px;
+    border: none;
+    margin: 6px;
+}
+.input:hover {
+    box-shadow: inset 0px 0px 0px 2px rgb(2, 17, 56);
+}
+.input:focus {
+    outline: none;
+}
+
+#file {
+    font-size: 24px;
+    margin: 6px;
+}
+
+
+button {
+    background-color: powderblue;
+    color: rgb(2, 17, 56);
+    font-size: 28px;
+    border: 2px solid rgb(2, 17, 56);
+    border-radius: 12px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+button:focus, button:hover, a:hover {
+    outline: none;
+}
+
+button:focus, button:hover {
+    background-color: rgb(2, 17, 56);
+    color: powderblue;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+  transform: translateY(3px);
+}
+
+@media screen and (max-width: 480px) {
+    .uploader-box {
+        position: absolute;
+        top: 130px;
+        width: 100%;
+    }
+    .uploader {
+        width: 95%;
+    }
 }
