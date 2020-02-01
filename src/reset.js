@@ -23,7 +23,7 @@ export default class ResetPassword extends React.Component {
                     <h2>Reset Password</h2>
                     {this.state.error && <div className="error">Oops!</div>}
                     <input name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
-                    <button onClick={() => this.submit()}>submit</button>
+                    <button onClick={e => this.submit(e)}>submit</button>
                     <p>Actually remembering your password? <Link to="/login">log in</Link></p>
                 </div>
             );

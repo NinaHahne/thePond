@@ -124,7 +124,7 @@ a, button {
 }
 
 a {
-    text-decoration: underline wavy;
+    text-decoration: underline;
 }
 
 a:hover {

@@ -172,6 +172,7 @@ app.post("/register", (req, res) => {
                 req.session.userId = id;
                 req.session.first = req.body.first;
                 req.session.last = req.body.last;
+                req.session.email = req.body.email;
                 res.json({
                     success: true
                 });
