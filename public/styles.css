@@ -147,13 +147,23 @@ a:hover {
     outline: none;
 }
 
+/* hiding the file input field: */
 #file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+/* styling the label for the file input field: */
+#file + label {
     font-size: 24px;
     margin: 6px;
 }
 
 
-button {
+button, #file + label {
     background-color: powderblue;
     color: rgb(2, 17, 56);
     font-size: 28px;
@@ -167,12 +177,12 @@ button:focus, button:hover, a:hover {
     outline: none;
 }
 
-button:focus, button:hover {
+button:focus, button:hover, #file:focus + label, #file + label:hover {
     background-color: rgb(2, 17, 56);
     color: powderblue;
 }
 
-button:hover {
+button:hover, #file + label:hover {
     cursor: pointer;
 }
 

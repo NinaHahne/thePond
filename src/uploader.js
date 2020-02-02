@@ -39,6 +39,7 @@ export default class Uploader extends React.Component {
                     <div className="closeX" onClick={() => this.props.closeUploader()}>X</div>
                     <p>Want to change your profile picture?</p>
                     <input id="file" type="file" onChange={e => this.handleChange(e)} name="file" accept='image/*'/>
+                    <label name="filename" htmlFor="file">Choose a file</label>
                     <button onClick={e => this.uploadImage(e)}>Upload</button>
                 </div>
             </div>
