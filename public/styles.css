@@ -2,12 +2,14 @@
     margin: 0;
     box-sizing: border-box;
     /* font-family: 'Changa', sans-serif; */
-    font-family: 'Amatic SC', cursive;
+    font-family: "Amatic SC", cursive;
     font-size: 28px;
     color: rgb(2, 17, 56);
 }
 
-html, body, main {
+html,
+body,
+main {
     height: 100%;
     width: 100%;
 }
@@ -34,11 +36,13 @@ header {
     padding: 0 30px;
 }
 
-.logo-small, .profile-pic {
+.logo-small,
+.profile-pic {
     height: 80px;
 }
 
-.logo-small img, .profile-pic img {
+.logo-small img,
+.profile-pic img {
     height: 100%;
 }
 
@@ -75,6 +79,18 @@ header {
     min-width: 300px;
 }
 
+.upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 100%; */
+    height: 41px;
+}
+
+/* .upload-btn img {
+    height: 85%;
+} */
+
 .closeX {
     position: absolute;
     top: 4px;
@@ -110,7 +126,9 @@ h1 {
     text-align: center;
 }
 
-.register, .login, .reset {
+.register,
+.login,
+.reset {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -118,7 +136,11 @@ h1 {
 }
 
 /* ********INPUTS & BUTTONS********** */
-a, button {
+a,
+button,
+.upload-btn,
+.icon,
+label {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
@@ -162,8 +184,8 @@ a:hover {
     margin: 6px;
 }
 
-
-button, #file + label {
+button,
+.upload-btn  {
     background-color: powderblue;
     color: rgb(2, 17, 56);
     font-size: 28px;
@@ -174,21 +196,46 @@ button, #file + label {
     padding: 1px 6px;
 }
 
-button:focus, button:hover, a:hover {
+.icon {
+    width: 35px;
+    height: 35px;
+    /* background: powderblue; */
+    stroke: rgb(2, 17, 56);
+}
+
+button:focus,
+button:hover,
+a:hover,
+.upload-btn:hover,
+.upload-btn:focus {
     outline: none;
 }
 
-button:focus, button:hover, #file:focus + label, #file + label:hover {
+button:focus,
+button:hover,
+.upload-btn:focus,
+.upload-btn:hover {
     background-color: rgb(2, 17, 56);
     color: powderblue;
 }
 
-button:hover, #file + label:hover {
+.upload-btn:hover label {
+    color: powderblue;
+}
+
+.upload-btn:focus .icon ,
+.upload-btn:hover .icon {
+    /* background: rgb(2, 17, 56); */
+    stroke: powderblue;
+}
+
+button:hover,
+.upload-btn:hover * {
     cursor: pointer;
 }
 
 button:active {
-  transform: translateY(3px);
+    transform: translateY(3px);
 }
 
 @media screen and (max-width: 480px) {
