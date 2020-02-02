@@ -4,11 +4,15 @@ import axios from './axios';
 export default class Uploader extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            filename: 'Choose a file'
+        };
     }
     handleChange(e) {
+        console.log('e.target.files[0].name: ', e.target.files[0].name);
         this.setState({
-            [e.target.name]: e.target.files[0]
+            [e.target.name]: e.target.files[0],
+            filename: e.target.files[0].name
         });
     }
     uploadImage(e) {
@@ -39,7 +43,7 @@ export default class Uploader extends React.Component {
                     <div className="closeX" onClick={() => this.props.closeUploader()}>X</div>
                     <p>Want to change your profile picture?</p>
                     <input id="file" type="file" onChange={e => this.handleChange(e)} name="file" accept='image/*'/>
-                    <label name="filename" htmlFor="file">Choose a file</label>
+                    <label name="filename" htmlFor="file" value={this.state.filename}>{this.state.filename}</label>
                     <button onClick={e => this.uploadImage(e)}>Upload</button>
                 </div>
             </div>
