@@ -42,7 +42,7 @@ export default class App extends React.Component {
             <>
                 <header>
                     <div className="logo-small">
-                        <img src="/images/thePond_3.svg" alt="thePond"/>
+                        <img src="/images/thePond_4.svg" alt="thePond"/>
                         <p><a href="/logout">hop out</a></p>
                     </div>
                     {this.state.uploaderIsVisible && <Uploader
