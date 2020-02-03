@@ -42,19 +42,19 @@ export default class BioEditor extends React.Component {
         <div className="editing-bio">
             <textarea id="edit-bio" name="bio" onChange={e => this.handleChange(e)} defaultValue={this.props.bio}></textarea>
             {/* <button onClick={this.props.setBio(this.state.bio)}>Save</button> */}
-            <button onClick={e => this.saveBio(e)}>Save</button>
+            <button className="save-btn" onClick={e => this.saveBio(e)}>Save</button>
         </div>;
 
         let noBioElem =
         <div>
             <p>{this.props.bio}</p>
-            <button onClick={() => this.setState({editingMode: true})}>Add Bio</button>
+            <button className="edit-or-add-btn" onClick={() => this.setState({editingMode: true})}>Add Bio</button>
         </div>;
 
         let bioElem =
         <div>
             <p>{this.props.bio}</p>
-            <button onClick={() => this.setState({editingMode: true})}>Edit Bio</button>
+            <button className="edit-or-add-btn" onClick={() => this.setState({editingMode: true})}>Edit Bio</button>
         </div>;
 
         return (
