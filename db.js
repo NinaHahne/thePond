@@ -19,6 +19,12 @@ exports.getUser = function(email) {
         .then(({ rows }) => rows);
 };
 
+exports.getUserById = function(id) {
+    return db
+        .query(`SELECT * FROM users WHERE id = $1`, [id])
+        .then(({ rows }) => rows);
+};
+
 exports.addImage = function(email, imageUrl) {
     return db.query(
         `UPDATE users

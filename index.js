@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
+const { addUser, getUser, getUserById, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
 
 app.use(helmet());
 
@@ -116,6 +116,27 @@ app.get("/user", (req, res) => {
             success: false
         });
     });
+});
+
+app.get("/api/user/:id", (req, res) => {
+    console.log("*************** /api/user/:id ***********");
+    getUserById(req.params.id).then(rows => {
+        res.json({
+            success: true,
+            userId: rows[0].id,
+            first: rows[0].first,
+            last: rows[0].last,
+            imageUrl: rows[0].img_url || '/images/duck-308733.svg',
+            bio: rows[0].bio || ''
+        });
+    }).catch(err => {
+        console.log("err in GET /api/user/:id : ", err);
+        res.json({
+            success: false
+        });
+    });
+
+
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
@@ -356,6 +377,8 @@ app.post("/bio/edit", (req, res) => {
             });
         });
 });
+
+
 
 // add other routes here (above get *)...
 // serves index.html for ALL routes:
