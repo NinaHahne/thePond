@@ -32,6 +32,7 @@ header {
 
 .profile {
     display: flex;
+    align-items: flex-start;
     margin-top: 50px;
     padding: 0 30px;
 }
@@ -41,14 +42,26 @@ header {
     height: 80px;
 }
 
+/* .profile-pic {
+    border: 2px solid rgb(2, 17, 56);
+    border-radius: 10px;
+} */
+
 .logo-small img,
 .profile-pic img {
     height: 100%;
+    border-radius: 10px;
 }
 
 .profile .profile-pic {
-    height: 150px;
+    width: 200px;
     margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.profile .profile-pic img {
+    height: unset;
+    width: 100%;
 }
 
 .profile-pic img:hover {
