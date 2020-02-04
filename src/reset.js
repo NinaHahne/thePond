@@ -32,7 +32,7 @@ export default class ResetPassword extends React.Component {
                 <div className="reset">
                     <h2>Reset Password</h2>
                     {this.state.error && <div className="error">Oops!</div>}
-                    <input key="code" name="code" placeholder="code" autoComplete="off" onChange={e => this.handleChange(e)}/>
+                    <input key="code" name="code" placeholder="code" onChange={e => this.handleChange(e)}/>
                     <input type="password" name="password" placeholder="new password" onChange={e => this.handleChange(e)}/>
                     <button onClick={(e) => this.submit(e)}>submit</button>
                 </div>
