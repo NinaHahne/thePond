@@ -3,9 +3,11 @@
     box-sizing: border-box;
     /* font-family: 'Changa', sans-serif; */
     font-family: "Amatic SC", cursive;
-    font-size: 28px;
+    /* font-size: 28px; */
     color: rgb(2, 17, 56);
 }
+
+/* || ***** GENERAL STYLES ******/
 
 html,
 body,
@@ -21,13 +23,55 @@ main {
     color: rgb(2, 17, 56);
 }
 
-/* logged in components: */
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 38px;
+}
+
+h3 {
+    font-size: 32px;
+}
+
+p, div, input {
+    font-size: 28px;
+}
+
+/* || ***** LOGGED OUT PAGES ******/
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+    padding-top: 150px;
+}
+
+.logo-big {
+    text-align: center;
+}
+
+.register,
+.login,
+.reset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* || ***** LOGGED IN PAGES ******/
+
 header {
     display: flex;
-    height: 150px;
+    height: 170px;
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+    flex-shrink: 0;
 }
 
 .profile {
@@ -121,34 +165,7 @@ header {
     color: rgb(2, 17, 56);
 }
 
-/* logged out components: */
-.welcome {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    height: 100%;
-    padding-top: 150px;
-}
-
-h1 {
-    font-size: 40px;
-}
-
-.logo-big {
-    text-align: center;
-}
-
-.register,
-.login,
-.reset {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* ********INPUTS & BUTTONS********** */
+/* || ***** LINKS, INPUTS, BUTTONS ******/
 a,
 button,
 .upload-btn,
@@ -160,6 +177,8 @@ label {
 
 a {
     text-decoration: underline;
+    margin: 0 10px;
+    font-size: 28px;
 }
 
 a:hover {

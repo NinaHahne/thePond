@@ -25,6 +25,21 @@ exports.getUserById = function(id) {
         .then(({ rows }) => rows);
 };
 
+exports.findUsers = function(searchFor) {
+    return db
+        .query(`SELECT * FROM users WHERE first ILIKE $1`, [searchFor + '%'])
+        .then(({ rows }) => rows);
+};
+
+exports.getRecentUsers = function() {
+    return db
+        .query(
+            `SELECT * FROM users
+            ORDER BY id DESC
+            LIMIT 3`)
+        .then(({ rows }) => rows);
+};
+
 exports.addImage = function(email, imageUrl) {
     return db.query(
         `UPDATE users

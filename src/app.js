@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "./axios";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import ProfilePic from "./profilepic";
 import Uploader from "./uploader";
 import Profile from "./profile";
 import OtherProfile from "./other-profile";
+import FindPeople from "./find-people";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ export default class App extends React.Component {
         });
     }
     setBio(updatedBio) {
-        console.log("in App, new bio text: ", updatedBio);
+        // console.log("in App, new bio text: ", updatedBio);
         this.setState({
             bio: updatedBio
         });
@@ -44,9 +45,10 @@ export default class App extends React.Component {
                     <header>
                         <div className="logo-small">
                             <img src="/images/thePond_4.svg" alt="thePond" />
-                            <p>
-                                <a href="/logout">hop out</a>
-                            </p>
+                        </div>
+                        <div className="nav">
+                            <Link to="/users">Find people</Link>
+                            <a href="/logout">hop out</a>
                         </div>
                         {this.state.uploaderIsVisible && (
                             <Uploader
@@ -98,6 +100,17 @@ export default class App extends React.Component {
                         userId={this.state.userId}
                         render={props => (
                             <OtherProfile
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/users"
+                        userId={this.state.userId}
+                        render={props => (
+                            <FindPeople
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}

@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser, getUserById, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
+const { addUser, getUser, getUserById, findUsers, getRecentUsers, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
 
 app.use(helmet());
 
@@ -135,8 +135,40 @@ app.get("/api/user/:id", (req, res) => {
             success: false
         });
     });
+});
 
+app.get("/api/find/:searchFor", (req, res) => {
+    console.log("*************** /api/find/:searchFor ***********");
+    // console.log('req.params.searchFor: ', req.params.searchFor);
+    findUsers(req.params.searchFor).then(rows => {
+        // console.log('rows from findUsers():', rows);
+        res.json({
+            success: true,
+            users: rows
+        });
+    }).catch(err => {
+        console.log("err in GET /api/find/:searchFor: ", err);
+        res.json({
+            success: false
+        });
+    });
+});
 
+app.get("/users/recent", (req, res) => {
+    console.log("*************** /users/recent ***********");
+    getRecentUsers().then(rows => {
+        // check if rows[0].length != 0;
+        // console.log('rows from findUsers():', rows);
+        res.json({
+            success: true,
+            recentUsers: rows
+        });
+    }).catch(err => {
+        console.log("err in GET /users/recent: ", err);
+        res.json({
+            success: false
+        });
+    });
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
