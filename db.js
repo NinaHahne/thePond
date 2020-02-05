@@ -50,6 +50,48 @@ exports.getRecentUsers = function(userId) {
         .then(({ rows }) => rows);
 };
 
+exports.getFriendsStatus = function(me, otherUser) {
+    return db
+        .query(
+            `SELECT * FROM friendships
+            WHERE (recipient_id = $1 AND sender_id = $2)
+            OR (recipient_id = $2 AND sender_id = $1)`,
+            [me, otherUser])
+        .then(({ rows }) => rows);
+};
+
+exports.makeFriendsReq = function(me, otherUser) {
+    return db
+        .query(
+            `INSERT INTO friendships (sender_id, recipient_id)
+            VALUES ($1, $2)
+            RETURNING id`,
+            [me, otherUser])
+        .then(({ rows }) => rows);
+};
+
+exports.acceptFriendsReq = function(me, otherUser) {
+    return db
+        .query(
+            `UPDATE friendships
+            SET accepted = true
+            WHERE (recipient_id = $1 AND sender_id = $2)
+            RETURNING id`,
+            [me, otherUser])
+        .then(({ rows }) => rows);
+};
+
+exports.endFriendship = function(sender_id, recipient_id) {
+    return db
+        .query(
+            `DELETE FROM friendships
+            WHERE (recipient_id = $1 AND sender_id = $2)
+            OR (recipient_id = $2 AND sender_id = $1)
+            RETURNING id`,
+            [sender_id, recipient_id])
+        .then(({ rows }) => rows);
+};
+
 exports.addImage = function(email, imageUrl) {
     return db.query(
         `UPDATE users
@@ -61,8 +103,10 @@ exports.addImage = function(email, imageUrl) {
 
 exports.addCode = function(email, code) {
     return db
-        .query(`INSERT INTO codes (email, code)
-        VALUES ($1, $2) RETURNING id`, [email, code])
+        .query(
+            `INSERT INTO codes (email, code)
+            VALUES ($1, $2) RETURNING id`,
+            [email, code])
         .then(({ rows }) => rows);
 };
 

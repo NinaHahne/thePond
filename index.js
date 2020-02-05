@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser, getUserById, findUsers, getRecentUsers, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
+const { addUser, getUser, getUserById, findUsers, getRecentUsers, getFriendsStatus, makeFriendsReq, acceptFriendsReq, endFriendship, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
 
 app.use(helmet());
 
@@ -158,13 +158,74 @@ app.get("/users/recent/:userId", (req, res) => {
     console.log("*************** /users/recent ***********");
     getRecentUsers(req.params.userId).then(rows => {
         // check if rows[0].length != 0;
-        // console.log('rows from findUsers():', rows);
         res.json({
             success: true,
             recentUsers: rows
         });
     }).catch(err => {
         console.log("err in GET /users/recent: ", err);
+        res.json({
+            success: false
+        });
+    });
+});
+
+app.get("/friends-status/:userId", (req, res) => {
+    console.log("*************** /friends-status/:userId ***********");
+    getFriendsStatus(req.session.userId, req.params.userId).then(rows => {
+        // check if rows[0].length != 0;
+        // console.log('rows after getFriendsStatus: ', rows);
+        res.json({
+            success: true,
+            friendsStatus: rows[0]
+        });
+    }).catch(err => {
+        console.log("err in /friends-status/:userId: ", err);
+        res.json({
+            success: false
+        });
+    });
+});
+
+app.post("/make-friend-request/:userId", (req, res) => {
+    console.log("*************** /make-friend-request/:userId ***********");
+    makeFriendsReq(req.session.userId, req.params.userId).then(() => {
+        // check if rows[0].length != 0;
+        res.json({
+            success: true,
+        });
+    }).catch(err => {
+        console.log("err in /make-friend-request/:userId: ", err);
+        res.json({
+            success: false
+        });
+    });
+});
+
+app.post("/accept-friend-request/:userId", (req, res) => {
+    console.log("*************** /accept-friend-request/:userId ***********");
+    acceptFriendsReq(req.session.userId, req.params.userId).then(() => {
+        // check if rows[0].length != 0;
+        res.json({
+            success: true,
+        });
+    }).catch(err => {
+        console.log("err in /accept-friend-request/:userId: ", err);
+        res.json({
+            success: false
+        });
+    });
+});
+
+app.post("/end-friendship/:userId", (req, res) => {
+    console.log("*************** /end-friendship/:userId ***********");
+    endFriendship(req.session.userId, req.params.userId).then(() => {
+        // check if rows[0].length != 0;
+        res.json({
+            success: true,
+        });
+    }).catch(err => {
+        console.log("err in /end-friendship/:userId: ", err);
         res.json({
             success: false
         });
@@ -186,6 +247,22 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         })
         .catch(err => {
             console.log("err in POST /upload", err);
+            res.json({
+                success: false
+            });
+        });
+});
+
+app.post("/bio/edit", (req, res) => {
+    console.log("*************** /POST /bio/edit ***********");
+    editBio(req.body.userId, req.body.bio)
+        .then(() => {
+            res.json({
+                success: true,
+            });
+        })
+        .catch(err => {
+            console.log("err in editBio(): ", err);
             res.json({
                 success: false
             });
@@ -392,23 +469,6 @@ app.post("/reset/verify", (req, res) => {
             });
         });
 });
-
-app.post("/bio/edit", (req, res) => {
-    console.log("*************** /POST /bio/edit ***********");
-    editBio(req.body.userId, req.body.bio)
-        .then(() => {
-            res.json({
-                success: true,
-            });
-        })
-        .catch(err => {
-            console.log("err in editBio(): ", err);
-            res.json({
-                success: false
-            });
-        });
-});
-
 
 
 // add other routes here (above get *)...

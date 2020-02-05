@@ -10,3 +10,5 @@
     -
 
 4. loading gifs for all loading processes?
+
+5. also refactor registration.js to use hooks

@@ -1,6 +1,8 @@
 import React from "react";
 import axios from './axios';
 
+import FriendButton from './friend-button';
+
 export default class OtherProfile extends React.Component{
 
     constructor(props) {
@@ -13,6 +15,9 @@ export default class OtherProfile extends React.Component{
         // returns object with info about the url:
         // console.log('this.props.match.params.id: ', this.props.match.params.id);
         let requestedId = this.props.match.params.id;
+        this.setState({
+            otherUserId: requestedId
+        });
         // we want the server to send back all info about the requested user
         // AND the id of the currently logged in user
         // IF these are the same.. we need to redirect them back to the /
@@ -56,6 +61,9 @@ export default class OtherProfile extends React.Component{
                 <div className="profile-pic">
                     <img src={this.state.imageUrl} alt="profile picture"></img>
                 </div>
+                <FriendButton
+                    otherUserId={this.state.otherUserId}
+                />
                 <div className="profile-text">
                     <h2>{this.state.first} {this.state.last}</h2>
                     {this.state.bio && bioElem}
