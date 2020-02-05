@@ -11,10 +11,8 @@ export default class OtherProfile extends React.Component{
     componentDidMount() {
         // here we want to make a request to the server to get all the info about the requested user...
         // returns object with info about the url:
-        console.log('this.props.match.params.id: ', this.props.match.params.id);
-
+        // console.log('this.props.match.params.id: ', this.props.match.params.id);
         let requestedId = this.props.match.params.id;
-
         // we want the server to send back all info about the requested user
         // AND the id of the currently logged in user
         // IF these are the same.. we need to redirect them back to the /
