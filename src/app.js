@@ -97,23 +97,23 @@ export default class App extends React.Component {
                     {/* <Route path="/user/:id" userId={this.state.userId} component={OtherProfile}/> */}
                     <Route
                         path="/user/:id"
-                        userId={this.state.userId}
                         render={props => (
                             <OtherProfile
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
+                                userId={this.state.userId}
                             />
                         )}
                     />
                     <Route
                         path="/users"
-                        userId={this.state.userId}
                         render={props => (
                             <FindPeople
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}
+                                userId={this.state.userId}
                             />
                         )}
                     />
