@@ -154,9 +154,9 @@ app.get("/api/find/:searchFor", (req, res) => {
     });
 });
 
-app.get("/users/recent", (req, res) => {
+app.get("/users/recent/:userId", (req, res) => {
     console.log("*************** /users/recent ***********");
-    getRecentUsers().then(rows => {
+    getRecentUsers(req.params.userId).then(rows => {
         // check if rows[0].length != 0;
         // console.log('rows from findUsers():', rows);
         res.json({
@@ -175,7 +175,6 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     console.log("*************** POST /upload ***********");
     const imageUrl = s3Url + req.file.filename;
     // url of image: https://s3.amazonaws.com/name-of-bucket/filename
-    console.log('req.session.email: ', req.session.email);
     addImage(req.session.email, imageUrl)
         .then(image => {
             // console.log('image after addImage(): ', image);
@@ -209,7 +208,7 @@ app.get("/welcome", function(req, res) {
 
 app.post("/register", (req, res) => {
     console.log("*************** /register POST ***********");
-    console.log(`your name is: ${req.body.first} ${req.body.last}`);
+    // console.log(`your name is: ${req.body.first} ${req.body.last}`);
     hash(req.body.password)
         .then(password => {
             addUser(
@@ -272,7 +271,7 @@ app.post("/login", (req, res) => {
             // console.log("userId in users table: ", userId);
             // console.log("userPW safed in user table: ", userPW);
             compare(typedPW, userPW).then(result => {
-                console.log("passwords do match: ", result);
+                // console.log("passwords do match: ", result);
                 if (result) {
                     // if password correct:
                     req.session.userId = userId;

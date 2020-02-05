@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from './axios';
 import { Link } from "react-router-dom";
 
-export default function FindPeople() {
+export default function FindPeople(props) {
     const [searchFor, setSearchFor] = useState(searchFor);
     const [users, setUsers] = useState([]);
     const [recentUsers, setRecentUsers] = useState([]);
@@ -10,12 +10,13 @@ export default function FindPeople() {
     // only runs ONCE when component mounts (because of [] in the end of useEffect):
     useEffect(() => {
         let ignore = false;
+        // console.log('props.userId: ', props.userId);
         (async () => {
             try {
-                const { data } = await axios.get('/users/recent');
+                const { data } = await axios.get(`/users/recent/${props.userId}`);
                 if (!ignore) {
                     if (data.success) {
-                        console.log('data in useEffect: ', data);
+                        // console.log('data in useEffect: ', data);
                         setRecentUsers(data.recentUsers);
                     } else {
                         // no users found??
@@ -30,7 +31,7 @@ export default function FindPeople() {
         return () => {
             // clean up function (return in useEffect is always a cleanup function)
             // invoked before component is re-rendered
-            console.log('searchFor in cleanup: ', searchFor);
+            // console.log('searchFor in cleanup: ', searchFor);
             ignore = true;
         };
     }, []);
@@ -80,11 +81,15 @@ export default function FindPeople() {
                     <div className="other-user">
                         { recentUsers.map((user) => {
                             // console.log('user: ', user);
+                            let imgSrc = '/images/duck-308733.svg';
+                            if (user.img_url) {
+                                imgSrc = user.img_url;
+                            }
                             return (
                                 <Link to={`/user/${user.id}`} key={user.id}>
                                     <div className="other-user" key={user.id}>
                                         <div className="profile-pic">
-                                            <img src={user.img_url} alt={`picture of ${user.first}`}></img>
+                                            <img src={imgSrc} alt={`picture of ${user.first}`}></img>
                                         </div>
                                         <div >{user.first} {user.last}</div>
                                     </div>

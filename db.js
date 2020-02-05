@@ -15,28 +15,38 @@ exports.addUser = function(first, last, email, password) {
 
 exports.getUser = function(email) {
     return db
-        .query(`SELECT * FROM users WHERE email = $1`, [email])
+        .query(
+            `SELECT * FROM users
+            WHERE email = $1`, [email])
         .then(({ rows }) => rows);
 };
 
 exports.getUserById = function(id) {
     return db
-        .query(`SELECT * FROM users WHERE id = $1`, [id])
+        .query(
+            `SELECT * FROM users
+            WHERE id = $1`,
+            [id])
         .then(({ rows }) => rows);
 };
 
 exports.findUsers = function(searchFor) {
     return db
-        .query(`SELECT * FROM users WHERE first ILIKE $1`, [searchFor + '%'])
+        .query(
+            `SELECT * FROM users
+            WHERE first ILIKE $1`,
+            [searchFor + '%'])
         .then(({ rows }) => rows);
 };
 
-exports.getRecentUsers = function() {
+exports.getRecentUsers = function(userId) {
     return db
         .query(
             `SELECT * FROM users
+            WHERE NOT id = $1
             ORDER BY id DESC
-            LIMIT 3`)
+            LIMIT 3`,
+            [userId])
         .then(({ rows }) => rows);
 };
 
