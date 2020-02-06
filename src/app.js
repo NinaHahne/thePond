@@ -46,32 +46,34 @@ export default class App extends React.Component {
                         <div className="logo-small">
                             <img src="/images/thePond_4.svg" alt="thePond" />
                         </div>
-                        <div className="nav">
-                            <Link to="/users">Find people</Link>
-                            <a href="/logout">hop out</a>
-                        </div>
-                        {this.state.uploaderIsVisible && (
-                            <Uploader
-                                // setImageUrl={imageUrl => this.setState({imageUrl})}
-                                setImageUrl={imageUrl =>
-                                    this.setState({
-                                        imageUrl: imageUrl,
-                                        uploaderIsVisible: false
-                                    })
+                        <div className="header-right">
+                            <div className="nav">
+                                <Link to="/users">Find people</Link>
+                                <a href="/logout">hop out</a>
+                            </div>
+                            {this.state.uploaderIsVisible && (
+                                <Uploader
+                                    // setImageUrl={imageUrl => this.setState({imageUrl})}
+                                    setImageUrl={imageUrl =>
+                                        this.setState({
+                                            imageUrl: imageUrl,
+                                            uploaderIsVisible: false
+                                        })
+                                    }
+                                    closeUploader={() =>
+                                        this.setState({ uploaderIsVisible: false })
+                                    }
+                                />
+                            )}
+                            <ProfilePic
+                                clickHandler={() =>
+                                    this.setState({ uploaderIsVisible: true })
                                 }
-                                closeUploader={() =>
-                                    this.setState({ uploaderIsVisible: false })
-                                }
+                                imageUrl={this.state.imageUrl}
+                                first={this.state.first}
+                                last={this.state.last}
                             />
-                        )}
-                        <ProfilePic
-                            clickHandler={() =>
-                                this.setState({ uploaderIsVisible: true })
-                            }
-                            imageUrl={this.state.imageUrl}
-                            first={this.state.first}
-                            last={this.state.last}
-                        />
+                        </div>
                     </header>
                     {/* <Route exact path="/chat" component={Chat} /> */}
                     <Route

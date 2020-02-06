@@ -73,12 +73,12 @@ export default function FindPeople(props) {
     };
 
     return (
-        <div className="find-users">
+        <div className="find-users main">
             <h2>Find People</h2>
             {!searchFor && (
                 <div className="recently-joined">
                     <h3>Checkout who just joined!</h3>
-                    <div className="other-user">
+                    <div className="users">
                         { recentUsers.map((user) => {
                             // console.log('user: ', user);
                             let imgSrc = '/images/duck-308733.svg';
@@ -101,9 +101,9 @@ export default function FindPeople(props) {
             )}
             <div className="search-users">
                 <h3>Are you looking for someone in particular?</h3>
-                <input onChange={onSearchForChange} placeholder='Enter first name' />
+                <input className="input" onChange={onSearchForChange} placeholder='Enter first name' />
                 {searchFor && (
-                    <div className="users-results">
+                    <div className="users">
                         { users.map((user) => {
                             // console.log('user: ', user);
                             return (

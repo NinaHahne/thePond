@@ -6,13 +6,15 @@ import BioEditor from './bioeditor';
 export default function Profile(props) {
     // console.log('props in profilepic.js: ', props);
     return (
-        <div className="profile">
-            <ProfilePic
-                clickHandler={props.clickHandler}
-                imageUrl={props.imageUrl}
-                first={props.first}
-                last={props.last}
-            />
+        <div className="profile main">
+            <div className="profile-left">
+                <ProfilePic
+                    clickHandler={props.clickHandler}
+                    imageUrl={props.imageUrl}
+                    first={props.first}
+                    last={props.last}
+                />
+            </div>
             <BioEditor
                 userId={props.userId}
                 first={props.first}

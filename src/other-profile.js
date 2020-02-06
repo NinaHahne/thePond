@@ -57,13 +57,16 @@ export default class OtherProfile extends React.Component{
         </div>;
 
         return (
-            <div className="profile">
-                <div className="profile-pic">
-                    <img src={this.state.imageUrl} alt="profile picture"></img>
+            <div className="profile main">
+                <div className="profile-left">
+                    <div className="profile-pic">
+                        <img src={this.state.imageUrl} alt="profile picture"></img>
+                    </div>
+                    <FriendButton
+                        otherUserId={this.state.otherUserId}
+                    />
+
                 </div>
-                <FriendButton
-                    otherUserId={this.state.otherUserId}
-                />
                 <div className="profile-text">
                     <h2>{this.state.first} {this.state.last}</h2>
                     {this.state.bio && bioElem}
