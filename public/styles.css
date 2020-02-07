@@ -44,20 +44,10 @@ a,
 button,
 .upload-btn,
 .icon,
-label {
+label,
+.logo-small {
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
-}
-
-a {
-    display: inline-block;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 28px;
-}
-
-a:visited {
-    color: rgb(2, 17, 56);
 }
 
 a:hover,
@@ -197,19 +187,30 @@ header {
     align-items: center;
 }
 
-header a {
-    /* border-bottom: 4px dotted rgb(2, 17, 56); */
+.nav a {
+    display: inline-block;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 28px;
 }
 
-header a:hover,
-header a:focus {
-    /* font-weight: bold; */
+.nav a:visited {
+    color: rgb(2, 17, 56);
+}
+
+.nav a:hover,
+.nav a:focus {
     transform: translateY(-3px);
     border-bottom: 4px dotted rgb(2, 17, 56);
 }
 
 .logo-small {
     height: 80px;
+}
+
+.logo-small:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .main {
