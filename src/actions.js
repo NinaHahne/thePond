@@ -12,7 +12,7 @@ export async function acceptFriendRequest(otherUserId) {
     const { data } = await axios.post("/accept-friend-request/" + otherUserId);
     return {
         type: 'ACCEPT_FRIEND_REQUEST',
-        acceptedUserId: otherUserId
+        otherUserId
     };
 }
 
@@ -20,7 +20,7 @@ export async function unfriend(otherUserId) {
     const { data } = await axios.post("/end-friendship/" + otherUserId);
     return {
         type: 'UNFRIEND',
-        unfriendedUserId: otherUserId
+        otherUserId
     };
 }
 

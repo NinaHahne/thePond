@@ -21,7 +21,7 @@ export default function Friends(props) {
         dispatch(receiveFriendsWannabes());
     }, []);
 
-    if (!friends) {
+    if (!friends && !wannabes) {
         return null;
     }
 
@@ -29,56 +29,56 @@ export default function Friends(props) {
         <div className="friends-wannabes main">
             <h2>These pondlings want to be your friends:</h2>
             <div className="wannabes users">
-                {wannabes.map(user => {
-                    // console.log('user: ', user);
+                {wannabes.map(wannabe => {
+                    // console.log('wannabe: ', wannabe);
                     let imgSrc = "/images/duck-308733.svg";
-                    if (user.img_url) {
-                        imgSrc = user.img_url;
+                    if (wannabe.img_url) {
+                        imgSrc = wannabe.img_url;
                     }
                     return (
-                        <React.Fragment key={user.id}>
-                            <Link to={`/user/${user.id}`} key={user.id}>
-                                <div className="other-user" key={user.id}>
+                        <React.Fragment key={wannabe.id}>
+                            <Link to={`/wannabe/${wannabe.id}`}>
+                                <div className="other-wannabe">
                                     <div className="profile-pic">
                                         <img
                                             src={imgSrc}
-                                            alt={`picture of ${user.first} ${user.last}`}
+                                            alt={`picture of ${wannabe.first} ${wannabe.last}`}
                                         ></img>
                                     </div>
                                     <div>
-                                        {user.first} {user.last}
+                                        {wannabe.first} {wannabe.last}
                                     </div>
                                 </div>
                             </Link>
-                            <button key={user.id} onClick={e => dispatch(acceptFriendRequest(user.id))}>Accept Friend Request</button>
+                            <button onClick={e => dispatch(acceptFriendRequest(wannabe.id))}>Accept Friend Request</button>
                         </React.Fragment>
                     );
                 })}
             </div>
             <h2>These pondlings are currently your friends:</h2>
-            <div className="friends users">
-                {friends.map(user => {
-                    // console.log('user: ', user);
+            <div className="friends friends">
+                {friends.map(friend => {
+                    // console.log('friend: ', friend);
                     let imgSrc = "/images/duck-308733.svg";
-                    if (user.img_url) {
-                        imgSrc = user.img_url;
+                    if (friend.img_url) {
+                        imgSrc = friend.img_url;
                     }
                     return (
-                        <React.Fragment key={user.id}>
-                            <Link to={`/user/${user.id}`} key={user.id}>
-                                <div className="other-user" key={user.id}>
+                        <React.Fragment key={friend.id}>
+                            <Link to={`/friend/${friend.id}`}>
+                                <div className="other-friend">
                                     <div className="profile-pic">
                                         <img
                                             src={imgSrc}
-                                            alt={`picture of ${user.first} ${user.last}`}
+                                            alt={`picture of ${friend.first} ${friend.last}`}
                                         ></img>
                                     </div>
                                     <div>
-                                        {user.first} {user.last}
+                                        {friend.first} {friend.last}
                                     </div>
                                 </div>
                             </Link>
-                            <button key={user.id} onClick={e => dispatch(unfriend(user.id))}>Unfriend</button>
+                            <button onClick={e => dispatch(unfriend(friend.id))}>Unfriend</button>
                         </React.Fragment>
                     );
                 })}

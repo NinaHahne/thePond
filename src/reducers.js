@@ -9,29 +9,33 @@ export default function reducer(state = {}, action) {
     }
 
     if (action.type === 'ACCEPT_FRIEND_REQUEST') {
-
         state = {
             ... state,
-            acceptedUserId: action.acceptedUserId
+            friendsWannabes: state.friendsWannabes.map(user => {
+                if (user.id == action.otherUserId) {
+                    return {
+                        ... user,
+                        accepted: true
+                    };
+                }
+                return user;
+            })
         };
     }
 
     if (action.type === 'UNFRIEND') {
-
         state = {
             ... state,
-            unfriendedUserId: action.unfriendedUserId
+            friendsWannabes: state.friendsWannabes.filter(user => {
+                user.id != action.otherUserId;
+            })
         };
     }
-
     // if (action.type === 'ALL_CAPS_WITH_UNDERSCORES') {
     //
     // }
-
-
     return state;
 }
-
 
 // ***immutable methods for making changes to redux:***
 // map - good for changing item(s) in an array
