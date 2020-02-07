@@ -7,6 +7,7 @@ import Uploader from "./uploader";
 import Profile from "./profile";
 import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
+import Friends from "./friends";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -51,6 +52,7 @@ export default class App extends React.Component {
                         <div className="header-right">
                             <div className="nav">
                                 <Link to="/users">Find Pondlings</Link>
+                                <Link to="/friends">Friends</Link>
                                 <a href="/logout">hop out</a>
                             </div>
                             {this.state.uploaderIsVisible && (
@@ -114,6 +116,17 @@ export default class App extends React.Component {
                         path="/users"
                         render={props => (
                             <FindPeople
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                                userId={this.state.userId}
+                            />
+                        )}
+                    />
+                    <Route
+                        path="/friends"
+                        render={props => (
+                            <Friends
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}

@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
     secrets = require("./secrets");
 }
 
-const { addUser, getUser, getUserById, findUsers, getRecentUsers, getFriendsStatus, makeFriendsReq, acceptFriendsReq, endFriendship, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
+const { addUser, getUser, getUserById, findUsers, getRecentUsers, getFriendsStatus, makeFriendsReq, acceptFriendsReq, endFriendship, getFriendsWannabes, addImage, addCode, getCode, setNewPassword, editBio } = require("./db");
 
 app.use(helmet());
 
@@ -181,6 +181,23 @@ app.get("/friends-status/:userId", (req, res) => {
         });
     }).catch(err => {
         console.log("err in /friends-status/:userId: ", err);
+        res.json({
+            success: false
+        });
+    });
+});
+
+app.get("/friends-wannabes", (req, res) => {
+    console.log("*************** /friends-wannabes ***********");
+    getFriendsWannabes(req.session.userId).then(rows => {
+        // check if rows[0].length != 0;
+        console.log('rows after getFriendsWannabes(): ', rows);
+        res.json({
+            success: true,
+            friendsWannabes: rows
+        });
+    }).catch(err => {
+        console.log("err in /friends-wannabes: ", err);
         res.json({
             success: false
         });

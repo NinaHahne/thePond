@@ -192,6 +192,8 @@ header {
     text-decoration: none;
     margin: 0 10px;
     font-size: 28px;
+    border-top: 4px dotted transparent;
+    border-bottom: 4px dotted transparent;
 }
 
 .nav a:visited {
@@ -234,7 +236,8 @@ header {
     margin-right: 20px;
 }
 
-.find-users {
+.find-users,
+.friends-wannabes {
     flex-direction: column;
     align-items: center;
 }
@@ -291,7 +294,8 @@ header .profile-pic img {
     flex-shrink: 0;
 }
 
-.find-users .profile-pic {
+.find-users .profile-pic,
+.friends-wannabes .profile-pic {
     width: 120px;
     margin-right: 15px;
     flex-shrink: 0;
@@ -303,7 +307,8 @@ header .profile-pic img {
 }
 
 .profile .profile-pic img,
-.find-users .profile-pic img {
+.find-users .profile-pic img,
+.friends-wannabes .profile-pic img {
     width: 100%;
     border-radius: 10px;
 }
