@@ -1,20 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import Hello from './hello';
-import Welcome from './welcome';
-import App from './app';
+import React from "react";
+import ReactDOM from "react-dom";
+import Welcome from "./welcome";
+import App from "./app";
 
-// console.log('hi!');
+// for redux *************************************************
+import { Provider } from "react-redux";
 
-// const elem = <Hello />;
-//
-// ReactDOM.render(
-//     elem,
-//     document.querySelector('main')
-// );
+import { createStore, applyMiddleware } from "redux";
+import reduxPromise from "redux-promise";
+import { composeWithDevTools } from "redux-devtools-extension";
+import reducer from "./reducers";
+
+const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(reduxPromise))
+);
+// /for redux *************************************************
 
 let elem;
-if (location.pathname == '/welcome') {
+if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
     // happens if user is isLoggedIn:
@@ -23,7 +27,11 @@ if (location.pathname == '/welcome') {
     //     <img src="/images/thePond_2.svg" alt="thePond"/>
     //     <p><a href="/logout">hop out</a></p>
     // </div>;
-    elem = <App/>;
+    elem = (
+        <Provider store={store}>
+            <App />
+        </Provider>
+    );
 }
 
 // const isLoggedIn = location.pathname != 'welcome';
@@ -32,7 +40,4 @@ if (location.pathname == '/welcome') {
 //     elem = <img src="/logo.gif"/>;
 // }
 
-ReactDOM.render(
-    elem,
-    document.querySelector('main')
-);
+ReactDOM.render(elem, document.querySelector("main"));
