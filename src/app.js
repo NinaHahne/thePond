@@ -44,11 +44,13 @@ export default class App extends React.Component {
                 <React.Fragment>
                     <header>
                         <div className="logo-small">
-                            <img src="/images/thePond_4.svg" alt="thePond" />
+                            <Link to="/">
+                                <img src="/images/thePond_4.svg" alt="thePond" />
+                            </Link>
                         </div>
                         <div className="header-right">
                             <div className="nav">
-                                <Link to="/users">Find people</Link>
+                                <Link to="/users">Find Pondlings</Link>
                                 <a href="/logout">hop out</a>
                             </div>
                             {this.state.uploaderIsVisible && (

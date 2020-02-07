@@ -74,7 +74,7 @@ export default function FindPeople(props) {
 
     return (
         <div className="find-users main">
-            <h2>Find People</h2>
+            <h2>Find Pondlings</h2>
             {!searchFor && (
                 <div className="recently-joined">
                     <h3>Checkout who just joined!</h3>
