@@ -13,6 +13,10 @@ const { hash, compare } = require("./bcrypt");
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
 
+// for socket.io:
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { origins: 'localhost:8080' });
+
 let secrets;
 if (process.env.NODE_ENV === "production") {
     secrets = process.env;
@@ -498,6 +502,33 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening.");
+});
+// app.listen(8080, function() {
+//     console.log("I'm listening.");
+// });
+
+io.on('connection', socket => {
+    console.log(`socket with the id ${socket.id} is now connected`);
+
+    socket.on('disconnect', function() {
+        console.log(`socket with the id ${socket.id} is now disconnected`);
+    });
+
+    socket.on('thanks', data => {
+        console.log(data);
+    });
+
+    socket.emit('welcome', {
+        message: 'Welcome. It is nice to see you'
+    });
+    // msg to all users:
+    io.emit('attention', {
+        msg: 'whatever'
+    });
+    // msg to all exept socket who just sent a message:
+    socket.broadcast.emit('message', {
+        msg: 'whatever'
+    });
 });
