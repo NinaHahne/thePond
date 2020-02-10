@@ -35,8 +35,8 @@ h3 {
     font-size: 32px;
 }
 
-p, div, input, textarea {
-    font-size: 28px;
+p, input, textarea {
+    font-size: 30px;
 }
 
 /* || ***** LINKS, INPUTS, BUTTONS ******/
@@ -53,6 +53,23 @@ label,
 a:hover,
 a:focus {
     outline: none;
+}
+
+.link {
+    display: inline-block;
+    text-decoration: none;
+    border-top: 4px dotted transparent;
+    border-bottom: 4px dotted transparent;
+}
+
+.link:visited {
+    color: rgb(2, 17, 56);
+}
+
+.link:hover,
+.link:focus {
+    transform: translateY(-3px);
+    border-bottom: 4px dotted rgb(2, 17, 56);
 }
 
 .input {
@@ -191,7 +208,8 @@ header {
     display: inline-block;
     text-decoration: none;
     margin: 0 10px;
-    font-size: 28px;
+    font-size: 30px;
+    /* font-weight: bold; */
     border-top: 4px dotted transparent;
     border-bottom: 4px dotted transparent;
 }
@@ -236,6 +254,7 @@ header {
     margin-right: 20px;
 }
 .profile-text p {
+    /* formats white-space characters like they were typed in the textarea field: */
     white-space: pre;
 }
 
@@ -274,19 +293,39 @@ textarea {
     flex-direction: column;
 }
 
+
 .users a {
     text-decoration: none;
 }
 
-.users a:hover .profile-pic {
+/* .users a:hover .profile-pic {
+    transform: translateX(-3px);
+} */
+
+.other-user:hover .profile-pic {
     transform: translateX(-3px);
 }
 
 .other-user {
     display: flex;
     align-items: center;
+    font-weight: bold;
+    font-size: 32px;
 }
 
+.name-btn-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.name-btn-box button {
+    margin: 5px 0;
+    border-width: 1px;
+    font-weight: normal;
+    font-size: 22px;
+    z-index: 5;
+}
 /* ***** profile pictures ***** */
 header .profile-pic {
     height: 80px;
