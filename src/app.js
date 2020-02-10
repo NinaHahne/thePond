@@ -9,6 +9,9 @@ import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import Friends from "./friends";
 
+// for socket.io:
+import * as io from 'socket.io-client';
+
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -17,6 +20,15 @@ export default class App extends React.Component {
         // this.setBio = this.setBio.bind(this);
     }
     componentDidMount() {
+        const socket = io.connect();
+
+        socket.on('welcome', data => {
+            console.log(data);
+            socket.emit('thanks', {
+                message: 'Thank you. It is great to be here.'
+            });
+        });
+
         axios.get("/user").then(({ data }) => {
             // console.log('data from get /user: ', data);
             this.setState(data);
