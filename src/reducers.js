@@ -1,20 +1,19 @@
-
 export default function reducer(state = {}, action) {
-    if (action.type === 'RECEIVE_FRIENDS_WANNABES') {
+    if (action.type === "RECEIVE_FRIENDS_WANNABES") {
         // cloning global redux state with spread operator:
         state = {
-            ... state,
+            ...state,
             friendsWannabes: action.friendsWannabes
         };
     }
 
-    if (action.type === 'ACCEPT_FRIEND_REQUEST') {
+    if (action.type === "ACCEPT_FRIEND_REQUEST") {
         state = {
-            ... state,
+            ...state,
             friendsWannabes: state.friendsWannabes.map(user => {
                 if (user.id == action.otherUserId) {
                     return {
-                        ... user,
+                        ...user,
                         accepted: true
                     };
                 }
@@ -23,11 +22,11 @@ export default function reducer(state = {}, action) {
         };
     }
 
-    if (action.type === 'UNFRIEND') {
+    if (action.type === "UNFRIEND") {
         state = {
-            ... state,
+            ...state ,
             friendsWannabes: state.friendsWannabes.filter(user => {
-                user.id != action.otherUserId;
+                return user.id != action.otherUserId;
             })
         };
     }

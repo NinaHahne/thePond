@@ -40,7 +40,7 @@ export default class BioEditor extends React.Component {
     render() {
         let editElem =
         <div className="editing-bio">
-            <textarea id="edit-bio" name="bio" onChange={e => this.handleChange(e)} defaultValue={this.props.bio}></textarea>
+            <textarea id="edit-bio" name="bio" rows="6" cols="40" onChange={e => this.handleChange(e)} defaultValue={this.props.bio}></textarea>
             {/* <button onClick={this.props.setBio(this.state.bio)}>Save</button> */}
             <button className="save-btn" onClick={e => this.saveBio(e)}>Save</button>
         </div>;

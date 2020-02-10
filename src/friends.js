@@ -37,8 +37,8 @@ export default function Friends(props) {
                     }
                     return (
                         <React.Fragment key={wannabe.id}>
-                            <Link to={`/wannabe/${wannabe.id}`}>
-                                <div className="other-wannabe">
+                            <Link to={`/user/${wannabe.id}`}>
+                                <div className="other-user">
                                     <div className="profile-pic">
                                         <img
                                             src={imgSrc}
@@ -56,7 +56,7 @@ export default function Friends(props) {
                 })}
             </div>
             <h2>These pondlings are currently your friends:</h2>
-            <div className="friends friends">
+            <div className="friends users">
                 {friends.map(friend => {
                     // console.log('friend: ', friend);
                     let imgSrc = "/images/duck-308733.svg";
@@ -65,8 +65,8 @@ export default function Friends(props) {
                     }
                     return (
                         <React.Fragment key={friend.id}>
-                            <Link to={`/friend/${friend.id}`}>
-                                <div className="other-friend">
+                            <Link to={`/user/${friend.id}`}>
+                                <div className="other-user">
                                     <div className="profile-pic">
                                         <img
                                             src={imgSrc}
