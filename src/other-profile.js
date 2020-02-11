@@ -27,7 +27,7 @@ export default class OtherProfile extends React.Component{
         }
 
         axios.get("/api/user/"+this.props.match.params.id).then(({ data }) => {
-            console.log('data after GET /api/user/:id: ', data);
+            // console.log('data after GET /api/user/:id: ', data);
 
             if (data.success) {
                 this.setState(data);
