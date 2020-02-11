@@ -46,15 +46,11 @@ export function Chat() {
                 <h1>Chat Room!</h1>
                 <div className='chat-container' ref={elemRef}>
                     {chatMessages.map(message => {
-                        let imgSrc = "/images/duck-308733.svg";
-                        if (message.img_url) {
-                            imgSrc = message.img_url;
-                        }
                         return (
                             <div key={message.id} className="message">
                                 <div className="profile-pic">
                                     <img
-                                        src={imgSrc}
+                                        src={message.img_url || "/images/duck-308733.svg"}
                                         alt={`picture of ${message.first} ${message.last}`}
                                     ></img>
                                 </div>

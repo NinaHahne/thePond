@@ -80,16 +80,11 @@ export default function FindPeople(props) {
                     <h3>Checkout who just joined!</h3>
                     <div className="users">
                         { recentUsers.map((user) => {
-                            // console.log('user: ', user);
-                            let imgSrc = '/images/duck-308733.svg';
-                            if (user.img_url) {
-                                imgSrc = user.img_url;
-                            }
                             return (
                                 <Link to={`/user/${user.id}`} key={user.id}>
                                     <div className="other-user" key={user.id}>
                                         <div className="profile-pic">
-                                            <img src={imgSrc} alt={`picture of ${user.first}`}></img>
+                                            <img src={user.img_url || '/images/duck-308733.svg'} alt={`picture of ${user.first} ${user.last}`}></img>
                                         </div>
                                         <div >{user.first} {user.last}</div>
                                     </div>
@@ -105,12 +100,11 @@ export default function FindPeople(props) {
                 {searchFor && (
                     <div className="users">
                         { users.map((user) => {
-                            // console.log('user: ', user);
                             return (
                                 <Link to={`/user/${user.id}`} key={user.id}>
                                     <div className="other-user" key={user.id}>
                                         <div className="profile-pic">
-                                            <img src={user.img_url} alt={`picture of ${user.first}`}></img>
+                                            <img src={user.img_url || '/images/duck-308733.svg'} alt={`picture of ${user.first} ${user.last}`}></img>
                                         </div>
                                         <div >{user.first} {user.last}</div>
                                     </div>

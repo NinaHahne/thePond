@@ -35,17 +35,13 @@ export default function Friends(props) {
 
             <div className="wannabes users">
                 {wannabes.map(wannabe => {
-                    let imgSrc = "/images/duck-308733.svg";
-                    if (wannabe.img_url) {
-                        imgSrc = wannabe.img_url;
-                    }
                     return (
                         <React.Fragment key={wannabe.id}>
                             <div className="other-user">
                                 <Link to={`/user/${wannabe.id}`}>
                                     <div className="profile-pic">
                                         <img
-                                            src={imgSrc}
+                                            src={wannabe.img_url || "/images/duck-308733.svg"}
                                             alt={`picture of ${wannabe.first} ${wannabe.last}`}
                                         ></img>
                                     </div>
@@ -83,18 +79,13 @@ export default function Friends(props) {
             {friends.length != 0 && <h2>Your are friends with:</h2>}
             <div className="friends users">
                 {friends.map(friend => {
-                    // console.log('friend: ', friend);
-                    let imgSrc = "/images/duck-308733.svg";
-                    if (friend.img_url) {
-                        imgSrc = friend.img_url;
-                    }
                     return (
                         <React.Fragment key={friend.id}>
                             <div className="other-user">
                                 <Link to={`/user/${friend.id}`}>
                                     <div className="profile-pic">
                                         <img
-                                            src={imgSrc}
+                                            src={friend.img_url || "/images/duck-308733.svg"}
                                             alt={`picture of ${friend.first} ${friend.last}`}
                                         ></img>
                                     </div>
