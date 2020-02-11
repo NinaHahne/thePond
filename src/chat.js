@@ -43,7 +43,7 @@ export function Chat() {
     return (
         <div className='main'>
             <div className='chat'>
-                <h1>Chat Room!</h1>
+                <h1>Chat</h1>
                 <div className='chat-container' ref={elemRef}>
                     {chatMessages.map(message => {
                         return (
@@ -67,6 +67,8 @@ export function Chat() {
                     }) }
                 </div>
                 <textarea
+                    rows="3"
+                    className="new-message"
                     placeholder = 'add your message here'
                     onKeyDown = {keyCheck}>
                 </textarea>

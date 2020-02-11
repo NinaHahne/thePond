@@ -597,7 +597,7 @@ io.on("connection", function(socket) {
             .then(data => {
                 getLastChatMessage(data[0].id)
                     .then(data => {
-                        console.log("data after getLastChatMessage: ", data);
+                        // console.log("data after getLastChatMessage: ", data);
                         let newMessageWithPrettyDate = formatDateFromNewMessage(data[0]);
                         io.sockets.emit("chatMessage", newMessageWithPrettyDate);
                     })

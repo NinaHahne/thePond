@@ -241,6 +241,9 @@ header {
     align-items: flex-start;
     background-color: hsl(186, 51%, 90%);
     padding: 30px;
+
+    flex-direction: column;
+    align-items: center;
 }
 
 .main .input {
@@ -271,10 +274,15 @@ textarea {
     background-color: hsl(186, 51%, 95%);
 }
 
-.find-users,
+/* .find-users,
 .friends-wannabes {
     flex-direction: column;
     align-items: center;
+} */
+
+.profile {
+    flex-direction: row;
+    align-items: flex-start;
 }
 
 .search-users {
@@ -351,7 +359,7 @@ header .profile-pic img {
 
 .find-users .profile-pic,
 .friends-wannabes .profile-pic {
-    width: 120px;
+    width: 100px;
     margin-right: 15px;
     flex-shrink: 0;
 }
@@ -428,27 +436,60 @@ header .profile-pic img {
     color: rgb(2, 17, 56);
 }
 
-.chat-container {
-    height: 300px;
-    width: 450px;
-    border: 2px solid rgb(2, 17, 56);
+/* ***** chat ***** */
+.chat {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    /* border: 2px solid rgb(2, 17, 56); */
     border-radius: 10px;
+    align-items: center;
+}
+.chat h1 {
+    margin-bottom: 20px;
+}
+.chat-container {
+    height: 400px;
+    width: 100%;
+    min-width: 450px;
+    /* border: 2px solid rgb(2, 17, 56);
+    border-radius: 10px; */
+    border-top: 4px dotted rgb(2, 17, 56);
+    border-bottom: 4px dotted rgb(2, 17, 56);
     padding: 0 6px;
     overflow-y: scroll;
+}
+
+textarea.new-message {
+    width: 100%;
+    max-width: 100%;
+    min-width: 450px;
+    border: none;
+    /* border-radius: 0px 0px 0px 10px; */
+    border-radius: unset;
+    padding: 6px;
+    border-bottom: 4px dotted rgb(2, 17, 56);
 }
 
 .message {
     display: flex;
     font-size: 30px;
+    margin-bottom: 6px;
+}
+
+.name-date-msg-box {
+    margin-left: 10px;
+}
+
+.date-time {
+    margin-left: 10px;
+    font-size: 26px;
+    color: grey;
 }
 
 .chat .profile-pic {
     width: 60px;
     flex-shrink: 0;
-}
-
-.date-time {
-    margin-left: 10px;
 }
 
 /* || ***** MOBILE ******/
