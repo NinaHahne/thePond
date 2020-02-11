@@ -582,6 +582,7 @@ io.on("connection", function(socket) {
     getLastTenChatMessages()
         .then(data => {
             // console.log("data after getLastTenChatMessages: ", data);
+            data.reverse();
             let messagesWithPrettyDates = formatDateFromMessages(data);
             // emitting the 10 messages to all connected sockets:
             io.sockets.emit("chatMessages", messagesWithPrettyDates);

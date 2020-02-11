@@ -172,7 +172,7 @@ exports.getLastTenChatMessages = function() {
             FROM messages
             JOIN users
             ON messages.user_id = users.id
-            ORDER BY id ASC
+            ORDER BY id DESC
             LIMIT 10`)
         .then(({ rows }) => rows);
 };
