@@ -363,7 +363,8 @@ header .profile-pic img {
 
 .profile .profile-pic img,
 .find-users .profile-pic img,
-.friends-wannabes .profile-pic img {
+.friends-wannabes .profile-pic img,
+.chat .profile-pic img {
     width: 100%;
     border-radius: 10px;
 }
@@ -414,6 +415,7 @@ header .profile-pic img {
     top: 4px;
     right: 4px;
     width: 15px;
+    font-size: 30px;
     font-weight: bold;
     align-self: flex-end;
     color: grey;
@@ -424,6 +426,29 @@ header .profile-pic img {
 .closeX:hover {
     cursor: pointer;
     color: rgb(2, 17, 56);
+}
+
+.chat-container {
+    height: 300px;
+    width: 450px;
+    border: 2px solid rgb(2, 17, 56);
+    border-radius: 10px;
+    padding: 0 6px;
+    overflow-y: scroll;
+}
+
+.message {
+    display: flex;
+    font-size: 30px;
+}
+
+.chat .profile-pic {
+    width: 60px;
+    flex-shrink: 0;
+}
+
+.date-time {
+    margin-left: 10px;
 }
 
 /* || ***** MOBILE ******/

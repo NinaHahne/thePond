@@ -164,3 +164,36 @@ exports.editBio = function(userId, bio) {
         [userId, bio]
     );
 };
+
+exports.getLastTenChatMessages = function() {
+    return db
+        .query(
+            `SELECT messages.id, messages.msg, messages.user_id, messages.created_at, users.first, users.last, users.img_url
+            FROM messages
+            JOIN users
+            ON messages.user_id = users.id
+            ORDER BY id ASC
+            LIMIT 10`)
+        .then(({ rows }) => rows);
+};
+
+exports.addNewChatMessage = function(userId, msg) {
+    return db
+        .query(
+            `INSERT INTO messages (user_id, msg)
+            VALUES ($1, $2) RETURNING id`,
+            [userId, msg])
+        .then(({ rows }) => rows);
+};
+
+exports.getLastChatMessage = function(id) {
+    return db
+        .query(
+            `SELECT messages.id, messages.msg, messages.user_id, messages.created_at, users.first, users.last, users.img_url
+            FROM messages
+            JOIN users
+            ON messages.user_id = users.id
+            WHERE messages.id = $1`,
+            [id])
+        .then(({ rows }) => rows);
+};

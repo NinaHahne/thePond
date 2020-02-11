@@ -9,6 +9,8 @@ import OtherProfile from "./other-profile";
 import FindPeople from "./find-people";
 import Friends from "./friends";
 
+import {Chat} from './chat';
+
 // for socket.io:
 import * as io from 'socket.io-client';
 
@@ -20,14 +22,14 @@ export default class App extends React.Component {
         // this.setBio = this.setBio.bind(this);
     }
     componentDidMount() {
-        const socket = io.connect();
+        // const socket = io.connect();
 
-        socket.on('welcome', data => {
-            console.log(data);
-            socket.emit('thanks', {
-                message: 'Thank you. It is great to be here.'
-            });
-        });
+        // socket.on('welcome', data => {
+        //     console.log(data);
+        //     socket.emit('thanks', {
+        //         message: 'Thank you. It is great to be here.'
+        //     });
+        // });
 
         axios.get("/user").then(({ data }) => {
             // console.log('data from get /user: ', data);
@@ -63,6 +65,7 @@ export default class App extends React.Component {
                         </div>
                         <div className="header-right">
                             <div className="nav">
+                                <Link to="/chat">Chat</Link>
                                 <Link to="/users">Find Pondlings</Link>
                                 <Link to="/friends">Friends</Link>
                                 <a href="/logout">hop out</a>
@@ -139,6 +142,17 @@ export default class App extends React.Component {
                         path="/friends"
                         render={props => (
                             <Friends
+                                key={props.match.url}
+                                match={props.match}
+                                history={props.history}
+                                userId={this.state.userId}
+                            />
+                        )}
+                    />
+                    <Route
+                        exact path="/chat"
+                        render={props => (
+                            <Chat
                                 key={props.match.url}
                                 match={props.match}
                                 history={props.history}

@@ -1,4 +1,5 @@
 export default function reducer(state = {}, action) {
+
     if (action.type === "RECEIVE_FRIENDS_WANNABES") {
         // cloning global redux state with spread operator:
         state = {
@@ -30,6 +31,22 @@ export default function reducer(state = {}, action) {
             })
         };
     }
+
+    if (action.type === "CHAT_MESSAGES") {
+        state = {
+            ...state ,
+            chatMessages: action.msgs
+        };
+    }
+
+    if (action.type === "CHAT_MESSAGE") {
+        // console.log('in reducer.js.. CHAT_MESSAGE: ', action.msg);
+        state = {
+            ...state ,
+            chatMessages: state.chatMessages.concat(action.msg)
+        };
+    }
+
     // if (action.type === 'ALL_CAPS_WITH_UNDERSCORES') {
     //
     // }

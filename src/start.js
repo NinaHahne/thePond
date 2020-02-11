@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import Welcome from "./welcome";
 import App from "./app";
 
+// for socket.io:
+import {init} from './socket';
+
 // for redux *************************************************
 import { Provider } from "react-redux";
 
@@ -21,6 +24,8 @@ let elem;
 if (location.pathname == "/welcome") {
     elem = <Welcome />;
 } else {
+    // for socket.io:
+    init(store);
     // happens if user is isLoggedIn:
     // elem =
     // <div className="logo-small">

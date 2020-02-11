@@ -30,3 +30,17 @@ export async function unfriend(otherUserId) {
 //     // all types should be written ALL_CAPS_WITH_UNDERSCORES
 //
 // }
+
+export function chatMessages(msgs) {
+    return {
+        type: 'CHAT_MESSAGES',
+        msgs
+    };
+}
+
+export function chatMessage(msg) {
+    return {
+        type: 'CHAT_MESSAGE',
+        msg
+    };
+}
