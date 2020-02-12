@@ -42,7 +42,8 @@ const {
     editBio,
     getLastTenChatMessages,
     addNewChatMessage,
-    getLastChatMessage
+    getLastChatMessage,
+    getOnlineUsers
 } = require("./db");
 
 const { formatDateFromMessages, formatDateFromNewMessage } = require("./functions");
@@ -238,7 +239,7 @@ app.get("/friends-wannabes", (req, res) => {
     getFriendsWannabes(req.session.userId)
         .then(rows => {
             // check if rows[0].length != 0;
-            console.log("rows after getFriendsWannabes(): ", rows);
+            // console.log("rows after getFriendsWannabes(): ", rows);
             res.json({
                 success: true,
                 friendsWannabes: rows
@@ -573,6 +574,28 @@ server.listen(8080, function() {
 //     console.log("I'm listening.");
 // });
 
+// SERVER SIDE SOCKET CODE
+let onlineUsers = {};
+let uniqueOnlineUsersIds = [];
+const updateOnlineUsers = (onlineUsers) => {
+    let onlineUsersIds = [];
+    for (let socketId in onlineUsers) {
+        onlineUsersIds.push(onlineUsers[socketId]);
+    }
+    // console.log('onlineUsersIds: ', onlineUsersIds);
+
+    // filter double entries: (actually not necessary, because the query invoked with getOnlineUsers() (..WHERE id = ANY ($1)) already returns no duplicate users!!)
+    uniqueOnlineUsersIds = [...new Set(onlineUsersIds)];
+    console.log('unique onlineUsersIds: ', uniqueOnlineUsersIds);
+
+    getOnlineUsers(uniqueOnlineUsersIds)
+        .then(data => {
+            // console.log('data from getOnlineUsers():', data);
+            io.sockets.emit('showOnlineUsers', data);
+        })
+        .catch(err => console.log("err in getOnlineUsers(): ", err));
+};
+
 io.on("connection", function(socket) {
     // if not logged in, disconnect:
     if (!socket.request.session.userId) {
@@ -590,6 +613,35 @@ io.on("connection", function(socket) {
         .catch(err => console.log("err in getLastTenChatMessages(): ", err));
 
     const userId = socket.request.session.userId;
+
+    // who is online?
+    onlineUsers[socket.id] = userId;
+    // console.log('onlineUsers: ', onlineUsers);
+
+    updateOnlineUsers(onlineUsers);
+
+    // let onlineUsersIds = [];
+    // for (let socketId in onlineUsers) {
+    //     onlineUsersIds.push(onlineUsers[socketId]);
+    // }
+    // // console.log('onlineUsersIds: ', onlineUsersIds);
+    //
+    // // filter double entries:
+    // uniqueOnlineUsersIds = [...new Set(onlineUsersIds)];
+    // console.log('unique onlineUsersIds: ', uniqueOnlineUsersIds);
+
+    // getOnlineUsers(uniqueOnlineUsersIds)
+    //     .then(data => {
+    //         // console.log('data from getOnlineUsers():', data);
+    //         io.sockets.emit('onlineUsers', data);
+    //     })
+    //     .catch(err => console.log("err in getOnlineUsers(): ", err));
+
+    socket.on('disconnect', function() {
+        console.log(`socket with the id ${socket.id} is now disconnected`);
+        delete onlineUsers[socket.id];
+        updateOnlineUsers(onlineUsers);
+    });
 
     socket.on("My amazing chat message", msg => {
         // console.log("on the server...", msg);

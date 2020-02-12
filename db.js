@@ -197,3 +197,14 @@ exports.getLastChatMessage = function(id) {
             [id])
         .then(({ rows }) => rows);
 };
+
+exports.getOnlineUsers = function(arrayOfUserIds) {
+    return db
+        .query(
+            `SELECT id, first, last, img_url
+            FROM users
+            WHERE id = ANY ($1)`,
+            [arrayOfUserIds]
+        )
+        .then(({ rows }) => rows);
+};

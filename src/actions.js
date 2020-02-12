@@ -44,3 +44,10 @@ export function chatMessage(msg) {
         msg
     };
 }
+
+export function showOnlineUsers(onlineUsers) {
+    return {
+        type: 'SHOW_ONLINE_USERS',
+        onlineUsers
+    };
+}

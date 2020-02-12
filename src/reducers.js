@@ -47,6 +47,13 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    if (action.type === "SHOW_ONLINE_USERS") {
+        state = {
+            ...state ,
+            onlineUsers: action.onlineUsers
+        };
+    }
+
     // if (action.type === 'ALL_CAPS_WITH_UNDERSCORES') {
     //
     // }

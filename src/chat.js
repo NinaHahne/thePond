@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import {socket} from './socket.js';
 import { useSelector } from "react-redux";
 
+import OnlineUsers from './online-users';
+
 export function Chat() {
     const chatMessages = useSelector(
         state => state && state.chatMessages
@@ -41,18 +43,20 @@ export function Chat() {
     }
 
     return (
-        <div className='main'>
+        <div className='main chat-room'>
             <div className='chat'>
-                <h1>Chat</h1>
-                <div className='chat-container' ref={elemRef}>
+                <h2>Chat</h2>
+                <div className='chat-container users' ref={elemRef}>
                     {chatMessages.map(message => {
                         return (
-                            <div key={message.id} className="message">
+                            <div key={message.id} className="message other-user">
                                 <div className="profile-pic">
-                                    <img
-                                        src={message.img_url || "/images/duck-308733.svg"}
-                                        alt={`picture of ${message.first} ${message.last}`}
-                                    ></img>
+                                    <Link to={`/user/${message.user_id}`}>
+                                        <img
+                                            src={message.img_url || "/images/duck-308733.svg"}
+                                            alt={`picture of ${message.first} ${message.last}`}
+                                        ></img>
+                                    </Link>
                                 </div>
                                 <div className="name-date-msg-box">
                                     <Link to={`/user/${message.user_id}`}>
@@ -73,6 +77,7 @@ export function Chat() {
                     onKeyDown = {keyCheck}>
                 </textarea>
             </div>
+            <OnlineUsers />
 
         </div>
     );
