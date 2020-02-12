@@ -24,25 +24,23 @@ export default class OtherProfile extends React.Component{
         if (requestedId == this.props.userId) {
             // we want to redirect them...
             this.props.history.push('/');
+        } else {
+            axios.get("/api/user/"+this.props.match.params.id).then(({ data }) => {
+                // console.log('data after GET /api/user/:id: ', data);
+
+                if (data.success) {
+                    this.setState(data);
+                } else {
+                    this.setState({
+                        error: true
+                    });
+                    // we also want to redirect if the user does not exist...
+                    this.props.history.push('/');
+                }
+            }).catch(err => {
+                console.log('err in GET /api/user/:id in other-profile.js', err);
+            });
         }
-
-        axios.get("/api/user/"+this.props.match.params.id).then(({ data }) => {
-            // console.log('data after GET /api/user/:id: ', data);
-
-            if (data.success) {
-                this.setState(data);
-            } else {
-                this.setState({
-                    error: true
-                });
-                // we also want to redirect if the user does not exist...
-                this.props.history.push('/');
-            }
-
-        }).catch(err => {
-            console.log('err in GET /api/user/:id in other-profile.js', err);
-        });
-
     }
 
     render() {
