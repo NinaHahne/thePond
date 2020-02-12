@@ -39,11 +39,8 @@ p, input, textarea {
     font-size: 30px;
 }
 
-/* || ***** UTILITIES ******/
+/* || ***** UTILITIES & EFFECTS ******/
 
-
-
-/* || ***** LINKS, INPUTS, BUTTONS ******/
 a,
 button,
 .upload-btn,
@@ -53,6 +50,8 @@ label,
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
+
+/* || ***** LINKS, INPUTS, BUTTONS ******/
 
 a:hover,
 a:focus {
@@ -234,6 +233,10 @@ header {
     height: 80px;
 }
 
+.logo-small img {
+    height: 100%;
+}
+
 .logo-small:hover {
     transform: scale(1.1);
     cursor: pointer;
@@ -241,21 +244,23 @@ header {
 
 header .profile-pic {
     height: 80px;
+    width: 80px;
     margin-left: 10px;
+    /* border: 2px dotted rgb(2, 17, 56); */
+    border-radius: 10px;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 
-/* .profile-pic {
-    border: 2px solid rgb(2, 17, 56);
-    border-radius: 10px;
-} */
-
-header .logo-small img,
 header .profile-pic img {
+    width: 100%;
     height: 100%;
-    border-radius: 10px;
+    object-fit: cover;
+    object-position: top;
+    /* border-radius: 10px; */
 }
 
-/* MAIN PAGES */
+/* MAIN PAGES - SIDEWIDE*/
 
 .main {
     position: relative;
@@ -274,11 +279,63 @@ header .profile-pic img {
     background-color: powderblue;
 }
 
+.users {
+    display: flex;
+    flex-direction: column;
+}
+
+.users a {
+    text-decoration: none;
+}
+
+.users .profile-pic {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+.other-user {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.other-user:hover .profile-pic {
+    transform: translateX(-3px);
+}
+
+.main .profile-pic {
+    flex-shrink: 0;
+}
+
+.main .profile-pic img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.profile-pic img:hover {
+    cursor: pointer;
+}
+
+/* PROFILE & OTHER PROFILE */
+
+.main.profile {
+    flex-direction: row;
+    align-items: flex-start;
+    padding-left: 10%;
+}
+
 .profile-left {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 30px;
+}
+
+.profile .profile-pic {
+    width: 200px;
+    flex-shrink: 0;
 }
 
 .profile-text {
@@ -306,17 +363,7 @@ textarea.edit-bio {
     width: 100%;
 }
 
-/* .find-users,
-.friends-wannabes {
-    flex-direction: column;
-    align-items: center;
-} */
-
-.profile {
-    flex-direction: row;
-    align-items: flex-start;
-    padding-left: 10%;
-}
+/* (FIND) USERS */
 
 .search-users {
     display: flex;
@@ -329,39 +376,26 @@ textarea.edit-bio {
     margin-bottom: 10px;
 }
 
-.users {
-    display: flex;
-    flex-direction: column;
+.find-users .profile-pic {
+    width: 100px;
+    margin-right: 15px;
 }
 
-
-.users a {
-    text-decoration: none;
-}
+/* FRIENDS */
 
 .friends-wannabes .users {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .friends-wannabes .other-user {
-    margin:10px;
+    margin: 10px 20px;
 }
 
-/* .users a:hover .profile-pic {
-    transform: translateX(-3px);
-} */
-
-.other-user:hover .profile-pic {
-    transform: translateX(-3px);
-}
-
-.other-user {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 32px;
-    flex-shrink: 0;
+.friends-wannabes .profile-pic {
+    width: 100px;
+    margin-right: 15px;
 }
 
 .name-btn-box {
@@ -377,41 +411,9 @@ textarea.edit-bio {
     font-size: 22px;
     z-index: 5;
 }
-/* ***** profile pictures ***** */
 
+/* UPLOADER modal*/
 
-.profile .profile-pic {
-    width: 200px;
-    /* margin-right: 20px; */
-    flex-shrink: 0;
-}
-
-.find-users .profile-pic,
-.friends-wannabes .profile-pic {
-    width: 100px;
-    margin-right: 15px;
-    flex-shrink: 0;
-}
-
-.users .profile-pic {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-}
-
-.profile .profile-pic img,
-.find-users .profile-pic img,
-.friends-wannabes .profile-pic img,
-.chat .profile-pic img,
-.online-users .profile-pic img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.profile-pic img:hover {
-    cursor: pointer;
-}
-
-/* ***** uploader ***** */
 .uploader-box {
     display: flex;
     justify-content: center;
@@ -443,10 +445,6 @@ textarea.edit-bio {
     /* width: 100%; */
     height: 41px;
 }
-
-/* .upload-btn img {
-    height: 85%;
-} */
 
 .closeX {
     position: absolute;
@@ -510,10 +508,6 @@ textarea.edit-bio {
     border-bottom: 4px dotted rgb(2, 17, 56);
     padding: 0 6px;
     overflow-y: scroll;
-}
-
-.chat-container p {
-    font-weight: normal;
 }
 
 .chat-container p,
