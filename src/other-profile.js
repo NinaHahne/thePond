@@ -55,7 +55,7 @@ export default class OtherProfile extends React.Component{
         </div>;
 
         return (
-            <div className="profile main">
+            <div className="profile main other">
                 <div className="profile-left">
                     <div className="profile-pic">
                         <img src={this.state.imageUrl} alt="profile picture"></img>

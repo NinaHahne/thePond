@@ -14,7 +14,7 @@ export default function Login() {
 
     return (
         <div className="login">
-            {error && <div className="error">Oops!</div>}
+            {error && <div className="error">Oops! Please try again!</div>}
             <input className="input" name="email" placeholder="email" onChange={e => handleChange(e)}/>
             <input className="input" type="password" name="password" placeholder="password" onChange={e => handleChange(e)}/>
             <button onClick={e => handleSubmit(e)}>hop in</button>

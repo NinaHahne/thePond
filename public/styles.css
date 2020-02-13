@@ -25,16 +25,16 @@ body::-webkit-scrollbar-thumb {
         rgb(73, 125, 189) 50%,
         rgba(2, 17, 56, 0.67) 80%
     ); */
-    background-image: linear-gradient(
+    /* background-image: linear-gradient(
         to top,
         rgb(2, 17, 56) 20%,
         rgb(117, 198, 22) 60%,
         rgb(23, 64, 22) 80%
-    );
-    /* background-image: linear-gradient(
+    ); */
+    background-image: linear-gradient(
         to bottom,
         red, orange , yellow, green, cyan, blue, purple
-    ); */
+    );
 }
 
 .chat-container::-webkit-scrollbar {
@@ -44,14 +44,10 @@ body::-webkit-scrollbar-thumb {
 .chat-container::-webkit-scrollbar-thumb {
     border-radius: 40%;
     background-image: linear-gradient(
-        to bottom,
-        red,
-        orange,
-        yellow,
-        green,
-        cyan,
-        blue,
-        purple
+        to top,
+        rgb(2, 17, 56) 20%,
+        rgb(117, 198, 22) 60%,
+        rgb(23, 64, 22) 80%
     );
 }
 
@@ -96,7 +92,8 @@ button,
 .upload-btn,
 .icon,
 label,
-.logo-small {
+.logo-small,
+.profile-pic {
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
@@ -112,7 +109,7 @@ a:focus {
     display: inline-block;
     text-decoration: none;
     border-top: 4px dotted transparent;
-    border-bottom: 4px dotted transparent;
+    border-bottom: 4px dotted hsl(186, 51%, 90%);
 }
 
 .link:visited {
@@ -122,7 +119,7 @@ a:focus {
 .link:hover,
 .link:focus {
     transform: translateY(-3px);
-    border-bottom: 4px dotted rgb(2, 17, 56);
+    border-bottom-color: rgb(2, 17, 56);
 }
 
 .input {
@@ -238,6 +235,15 @@ button:active,
     align-items: center;
 }
 
+.auth p {
+    margin-bottom: 5px;
+}
+
+.error {
+    font-size: 36px;
+    color: red;
+}
+
 /* || ***** LOGGED IN PAGES ******/
 
 /* HEADER */
@@ -269,7 +275,7 @@ header {
     font-size: 30px;
     /* font-weight: bold; */
     border-top: 4px dotted transparent;
-    border-bottom: 4px dotted transparent;
+    border-bottom: 4px dotted hsl(186, 51%, 90%);
 }
 
 .nav a:visited {
@@ -313,6 +319,10 @@ header .profile-pic {
     border-radius: 10px;
     flex-shrink: 0;
     overflow: hidden;
+}
+
+header .profile-pic:hover {
+    transform: scale(1.1);
 }
 
 header .profile-pic img {
@@ -401,6 +411,18 @@ header .profile-pic img {
     flex-shrink: 0;
 }
 
+.profile .profile-pic:hover {
+    transform: scale(1.1);
+}
+
+.profile.other .profile-pic:hover {
+    transform: none;
+}
+
+.profile.other .profile-pic img:hover {
+    cursor: unset;
+}
+
 .profile-text {
     width: 60%;
     display: flex;
@@ -426,6 +448,10 @@ textarea.edit-bio {
     width: 100%;
 }
 
+.edit-or-add-btn {
+    margin-top: 15px;
+}
+
 /* (FIND) USERS */
 
 .search-users {
@@ -448,6 +474,19 @@ textarea.edit-bio {
 .recently-joined h3 {
     text-align: center;
     margin-bottom: 10px;
+}
+
+.search-users-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.search-users-container > * {
+    margin: 0px 15px;
+    justify-items: flex-start;
+    align-items: flex-start;
+    min-width: 320px;
 }
 
 .find-users .profile-pic {
@@ -569,8 +608,12 @@ textarea.edit-bio {
     margin-right: 10px;
 }
 
-.chat-room .other-user:hover .profile-pic {
+.online-users .other-user:hover .profile-pic {
     transform: translateX(-3px);
+}
+
+.chat .other-user:hover .profile-pic {
+    transform: rotate(10deg);
 }
 
 .chat {
