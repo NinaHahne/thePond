@@ -364,9 +364,9 @@ header .profile-pic img {
     flex-shrink: 0;
 }
 
-.other-user:hover .profile-pic {
+/* .other-user:hover .profile-pic {
     transform: translateX(-3px);
-}
+} */
 
 .main .profile-pic {
     flex-shrink: 0;
@@ -434,6 +434,17 @@ textarea.edit-bio {
     align-items: center;
 }
 
+.recently-joined .users {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.recently-joined .other-user {
+    margin: 10px 20px;
+}
+
 .recently-joined h3 {
     text-align: center;
     margin-bottom: 10px;
@@ -444,12 +455,17 @@ textarea.edit-bio {
     margin-right: 15px;
 }
 
+.find-users .other-user:hover .profile-pic {
+    transform: scale(1.1);
+}
+
 /* FRIENDS */
 
 .friends-wannabes .users {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 
 .friends-wannabes .other-user {
@@ -462,7 +478,6 @@ textarea.edit-bio {
 }
 
 .friends-wannabes .other-user:hover .profile-pic {
-    transform: translateX(0);
     transform: scale(1.1);
 }
 
@@ -552,6 +567,10 @@ textarea.edit-bio {
     width: 60px;
     flex-shrink: 0;
     margin-right: 10px;
+}
+
+.chat-room .other-user:hover .profile-pic {
+    transform: translateX(-3px);
 }
 
 .chat {
