@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { socket } from "./socket.js";
 import { useSelector } from "react-redux";
 
 export default function OnlineUsers() {

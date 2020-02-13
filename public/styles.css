@@ -538,12 +538,15 @@ textarea.new-message {
     margin-bottom: 6px;
 }
 
+
 .name-date-msg-box {
     margin-left: 10px;
+    margin-right: 10px;
 }
 
 .date-time {
     margin-left: 10px;
+    margin-right: 10px;
     font-size: 26px;
     color: grey;
 }
@@ -551,6 +554,21 @@ textarea.new-message {
 .chat .profile-pic {
     width: 60px;
     flex-shrink: 0;
+}
+
+/* chat message from active user: */
+.message-right {
+    flex-direction: row-reverse;
+}
+
+.message-right .name-date-box {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.message-right p {
+    text-align: right;
 }
 
 /* || ***** MOBILE ******/

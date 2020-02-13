@@ -9,12 +9,16 @@ export function Chat() {
     const chatMessages = useSelector(
         state => state && state.chatMessages
     );
+    const userId = useSelector(
+        state => state && state.userId
+    );
     // console.log('chatMessages: ', chatMessages);
 
     const elemRef = useRef();
 
     useEffect(() => {
         console.log('chat mounted!!!!!!');
+        console.log('userId: ', userId);
 
         if (chatMessages) {
             // console.log('elemRef: ', elemRef);
@@ -33,7 +37,7 @@ export function Chat() {
             // console.log('which key user pressed...', e.keyCode);
             // console.log('which key user pressed...', e.key);
             // console.log('what the user is typing: ', e.target.value);
-            socket.emit('My amazing chat message', e.target.value);
+            socket.emit('post chat message', e.target.value);
             e.target.value = '';
         }
     };
@@ -48,8 +52,12 @@ export function Chat() {
                 <h2>Chat</h2>
                 <div className='chat-container users' ref={elemRef}>
                     {chatMessages.map(message => {
+                        let msgClassName = 'message-left';
+                        if (message.user_id == userId) {
+                            msgClassName = 'message-right';
+                        }
                         return (
-                            <div key={message.id} className="message other-user">
+                            <div key={message.id} className={`message other-user ${msgClassName}`}>
                                 <div className="profile-pic">
                                     <Link to={`/user/${message.user_id}`}>
                                         <img
@@ -59,10 +67,12 @@ export function Chat() {
                                     </Link>
                                 </div>
                                 <div className="name-date-msg-box">
-                                    <Link to={`/user/${message.user_id}`}>
-                                        {message.first} {message.last}
-                                    </Link>
-                                    <span className="date-time">{message.prettyDate || message.created_at}</span>
+                                    <div className="name-date-box">
+                                        <Link to={`/user/${message.user_id}`}>
+                                            {message.first} {message.last}
+                                        </Link>
+                                        <span className="date-time">{message.prettyDate || message.created_at}</span>
+                                    </div>
                                     <p>{message.msg}</p>
                                 </div>
                             </div>

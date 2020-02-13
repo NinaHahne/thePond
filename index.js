@@ -601,41 +601,24 @@ io.on("connection", function(socket) {
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
+    const userId = socket.request.session.userId;
+    socket.emit('your userId', userId);
     //  get the last 10 messages from DB:
     getLastTenChatMessages()
         .then(data => {
             // console.log("data after getLastTenChatMessages: ", data);
             data.reverse();
-            let messagesWithPrettyDates = formatDateFromMessages(data);
+            let messages = formatDateFromMessages(data);
+
             // emitting the 10 messages to all connected sockets:
-            io.sockets.emit("chatMessages", messagesWithPrettyDates);
+            io.sockets.emit("chatMessages", messages);
         })
         .catch(err => console.log("err in getLastTenChatMessages(): ", err));
-
-    const userId = socket.request.session.userId;
 
     // who is online?
     onlineUsers[socket.id] = userId;
     // console.log('onlineUsers: ', onlineUsers);
-
     updateOnlineUsers(onlineUsers);
-
-    // let onlineUsersIds = [];
-    // for (let socketId in onlineUsers) {
-    //     onlineUsersIds.push(onlineUsers[socketId]);
-    // }
-    // // console.log('onlineUsersIds: ', onlineUsersIds);
-    //
-    // // filter double entries:
-    // uniqueOnlineUsersIds = [...new Set(onlineUsersIds)];
-    // console.log('unique onlineUsersIds: ', uniqueOnlineUsersIds);
-
-    // getOnlineUsers(uniqueOnlineUsersIds)
-    //     .then(data => {
-    //         // console.log('data from getOnlineUsers():', data);
-    //         io.sockets.emit('onlineUsers', data);
-    //     })
-    //     .catch(err => console.log("err in getOnlineUsers(): ", err));
 
     socket.on('disconnect', function() {
         console.log(`socket with the id ${socket.id} is now disconnected`);
@@ -643,15 +626,21 @@ io.on("connection", function(socket) {
         updateOnlineUsers(onlineUsers);
     });
 
-    socket.on("My amazing chat message", msg => {
+    socket.on("post chat message", msg => {
         // console.log("on the server...", msg);
         addNewChatMessage(userId, msg)
             .then(data => {
                 getLastChatMessage(data[0].id)
                     .then(data => {
                         // console.log("data after getLastChatMessage: ", data);
-                        let newMessageWithPrettyDate = formatDateFromNewMessage(data[0]);
-                        io.sockets.emit("chatMessage", newMessageWithPrettyDate);
+                        let newMessage = formatDateFromNewMessage(data[0]);
+                        // also send back userId of sender just in case...
+                        let messageData = {
+                            ...newMessage,
+                            senderId: userId
+                        };
+                        // console.log('here is a new message from userId ', messageData.senderId, ':', newMessage.msg);
+                        io.sockets.emit("chatMessage", newMessage);
                     })
                     .catch(err =>
                         console.log("err in getLastChatMessage(): ", err)

@@ -54,6 +54,13 @@ export default function reducer(state = {}, action) {
         };
     }
 
+    if (action.type === "PASS_USER_ID") {
+        state = {
+            ...state ,
+            userId: action.userId
+        };
+    }
+
     // if (action.type === 'ALL_CAPS_WITH_UNDERSCORES') {
     //
     // }

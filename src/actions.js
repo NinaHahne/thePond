@@ -51,3 +51,10 @@ export function showOnlineUsers(onlineUsers) {
         onlineUsers
     };
 }
+
+export function passUserId(userId) {
+    return {
+        type: 'PASS_USER_ID',
+        userId
+    };
+}
