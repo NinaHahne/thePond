@@ -49,7 +49,7 @@ export function Chat() {
     return (
         <div className='main chat-room'>
             <div className='chat'>
-                <h2>Chat</h2>
+                <h2>Pondwide Chat</h2>
                 <div className='chat-container users' ref={elemRef}>
                     {chatMessages.map(message => {
                         let msgClassName = 'message-left';
@@ -88,7 +88,8 @@ export function Chat() {
                 </textarea>
             </div>
             <OnlineUsers />
-
+            
+            <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
         </div>
     );
 }

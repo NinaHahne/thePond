@@ -223,6 +223,7 @@ export default function FindPeople(props) {
                     )}
                 </div>
             </div>
+            <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
         </div>
     );
 }

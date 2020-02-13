@@ -22,6 +22,7 @@ export default function Profile(props) {
                 bio={props.bio}
                 setBio={props.setBio}
             />
+            <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
         </div>
     );
 }

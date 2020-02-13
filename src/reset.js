@@ -24,7 +24,8 @@ export default class ResetPassword extends React.Component {
                     {this.state.error && <div className="error">Oops!  Please try again!</div>}
                     <input className="input" name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
                     <button onClick={e => this.submit(e)}>submit</button>
-                    <p>Actually remembering your password? <Link className="link" to="/login">log in</Link></p>
+                    <p>Actually remembering your password? <Link className="link" to="/login">hop in</Link></p>
+                    <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
                 </div>
             );
         } else if (this.state.step == "verify") {
@@ -36,6 +37,7 @@ export default class ResetPassword extends React.Component {
                     <input className="input" key="code" name="code" placeholder="code" onChange={e => this.handleChange(e)}/>
                     <input className="input" type="password" name="password" placeholder="new password" onChange={e => this.handleChange(e)}/>
                     <button onClick={(e) => this.submit(e)}>submit</button>
+                    <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
                 </div>
             );
         } else if (this.state.step == "confirmed") {
@@ -43,7 +45,8 @@ export default class ResetPassword extends React.Component {
                 <div className="reset">
                     <h2>Reset Password</h2>
                     <p>Success!</p>
-                    <p>You can now <Link className="link" to="/login">log in</Link> with your new password</p>
+                    <p>You can now <Link className="link" to="/login">hop in</Link> with your new password</p>
+                    <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
                 </div>
             );
         }

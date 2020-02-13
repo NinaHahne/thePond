@@ -22,7 +22,7 @@ export default function OnlineUsers() {
 
     return (
         <div className="online-users">
-            <h2>Online Users:</h2>
+            <h2>Online Pondlings:</h2>
             <div className="online-users-container users" ref={elemRef}>
                 {onlineUsers.map(user => {
                     return (

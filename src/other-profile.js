@@ -70,6 +70,7 @@ export default class OtherProfile extends React.Component{
                     {this.state.bio && bioElem}
                     {!this.state.bio && noBioElem}
                 </div>
+                <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
             </div>
         );
     }

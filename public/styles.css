@@ -391,6 +391,13 @@ header .profile-pic img {
     cursor: pointer;
 }
 
+.reed {
+    position: fixed;
+    right: 15px;
+    bottom: 5px;
+    height: 250px;
+}
+
 /* PROFILE & OTHER PROFILE */
 
 .main.profile {
@@ -446,6 +453,10 @@ textarea.edit-bio {
     padding: 2px;
     background-color: hsl(186, 51%, 95%);
     width: 100%;
+}
+
+textarea.edit-bio:focus {
+    outline: none;
 }
 
 .edit-or-add-btn {

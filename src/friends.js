@@ -107,6 +107,7 @@ export default function Friends(props) {
                     );
                 })}
             </div>
+            <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
         </div>
     );
 }

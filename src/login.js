@@ -22,6 +22,7 @@ export default function Login() {
             <p>Not a member yet? <Link className="link" to="/">register</Link> </p>
             <p>Forgot your password? <Link className="link" to="/reset">Reset password</Link> </p>
 
+            <img className="reed" src="/images/jing.fm-pond-clipart-293509.png"></img>
         </div>
     );
 
