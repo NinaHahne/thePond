@@ -30,11 +30,19 @@ exports.getUserById = function(id) {
         .then(({ rows }) => rows);
 };
 
+// exports.findUsers = function(searchFor) {
+//     return db
+//         .query(
+//             `SELECT * FROM users
+//             WHERE first ILIKE $1`,
+//             [searchFor + '%'])
+//         .then(({ rows }) => rows);
+// };
+
 exports.findUsers = function(searchFor) {
     return db
         .query(
-            `SELECT * FROM users
-            WHERE first ILIKE $1`,
+            `SELECT * FROM users WHERE first ILIKE $1 OR last ILIKE $1 OR CONCAT(first, ' ', last) ILIKE $1 ORDER BY id LIMIT 4`,
             [searchFor + '%'])
         .then(({ rows }) => rows);
 };
