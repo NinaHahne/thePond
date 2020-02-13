@@ -69,6 +69,11 @@ export default function FindPeople(props) {
 
     const onSearchForChange = ({target}) => {
         // console.log('target.value: ', target.value);
+
+        // if value is just an empty string, do nothing:
+        if (target.value == " ") {
+            target.value = target.value.replace(/ +/g, "");
+        }
         setSearchFor(target.value);
     };
 
@@ -96,7 +101,7 @@ export default function FindPeople(props) {
             )}
             <div className="search-users">
                 <h3>Are you looking for someone in particular?</h3>
-                <input className="input" onChange={onSearchForChange} placeholder='Enter first name' />
+                <input className="input" onChange={onSearchForChange} placeholder='Enter name' />
                 {searchFor && (
                     <div className="users">
                         { users.map((user) => {
