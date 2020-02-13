@@ -7,6 +7,26 @@
     color: rgb(2, 17, 56);
 }
 
+/* SCROLL BARS */
+body::-webkit-scrollbar,
+.chat-container::-webkit-scrollbar {
+    width: 0.6em;
+}
+
+/* body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+} */
+
+body::-webkit-scrollbar-thumb,
+.chat-container::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-image: linear-gradient(to top,
+        powderblue 0%,
+        rgb(73,125,189) 50%,
+        rgba(2, 17, 56, 0.67) 80%
+        );
+}
+
 /* || ***** GENERAL STYLES ******/
 
 html,
@@ -478,6 +498,7 @@ textarea.edit-bio {
 
 .online-users {
     margin-left: 30px;
+    flex-shrink: 0;
 }
 
 .online-users .other-user {
@@ -494,6 +515,7 @@ textarea.edit-bio {
     display: flex;
     flex-direction: column;
     width: 60%;
+    min-width: 450px;
     /* border: 2px solid rgb(2, 17, 56); */
     border-radius: 10px;
     align-items: center;
@@ -511,7 +533,7 @@ textarea.edit-bio {
     border-radius: 10px; */
     border-top: 4px dotted rgb(2, 17, 56);
     border-bottom: 4px dotted rgb(2, 17, 56);
-    padding: 0 6px;
+    padding: 0 10px 0 6px;
     overflow-y: scroll;
 }
 
