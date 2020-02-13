@@ -29,6 +29,7 @@ const {
     getUser,
     getUserById,
     findUsers,
+    findUsersByBio,
     getRecentUsers,
     getFriendsStatus,
     makeFriendsReq,
@@ -179,7 +180,7 @@ app.get("/api/user/:id", (req, res) => {
 });
 
 app.get("/api/find/:searchFor", (req, res) => {
-    console.log("*************** /api/find/:searchFor ***********");
+    // console.log("*************** /api/find/:searchFor ***********");
     // console.log('req.params.searchFor: ', req.params.searchFor);
     findUsers(req.params.searchFor)
         .then(rows => {
@@ -191,6 +192,25 @@ app.get("/api/find/:searchFor", (req, res) => {
         })
         .catch(err => {
             console.log("err in GET /api/find/:searchFor: ", err);
+            res.json({
+                success: false
+            });
+        });
+});
+
+app.get("/api/findbio/:searchFor", (req, res) => {
+    // console.log("*************** /api/findbio/:searchFor ***********");
+    // console.log('req.params.searchFor: ', req.params.searchFor);
+    findUsersByBio(req.params.searchFor)
+        .then(rows => {
+            // console.log('rows from findUsers():', rows);
+            res.json({
+                success: true,
+                users: rows
+            });
+        })
+        .catch(err => {
+            console.log("err in GET /api/findbio/:searchFor: ", err);
             res.json({
                 success: false
             });

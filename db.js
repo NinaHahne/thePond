@@ -52,6 +52,17 @@ exports.findUsers = function(searchFor) {
         .then(({ rows }) => rows);
 };
 
+exports.findUsersByBio = function(searchFor) {
+    return db
+        .query(
+            `SELECT * FROM users
+            WHERE bio ILIKE $1
+            ORDER BY id
+            LIMIT 6`,
+            ['%'+ searchFor + '%'])
+        .then(({ rows }) => rows);
+};
+
 exports.getRecentUsers = function(userId) {
     return db
         .query(
