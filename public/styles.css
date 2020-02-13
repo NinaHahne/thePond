@@ -8,23 +8,51 @@
 }
 
 /* SCROLL BARS */
-body::-webkit-scrollbar,
-.chat-container::-webkit-scrollbar {
-    width: 0.6em;
+body::-webkit-scrollbar {
+    width: 8px;
 }
 
-/* body::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-} */
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
 
-body::-webkit-scrollbar-thumb,
-.chat-container::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background-image: linear-gradient(to top,
+    /* background-image: linear-gradient(
+        to top,
         powderblue 0%,
-        rgb(73,125,189) 50%,
+        rgb(73, 125, 189) 50%,
         rgba(2, 17, 56, 0.67) 80%
-        );
+    ); */
+    background-image: linear-gradient(
+        to top,
+        rgb(2, 17, 56) 20%,
+        rgb(117, 198, 22) 60%,
+        rgb(23, 64, 22) 80%
+    );
+    /* background-image: linear-gradient(
+        to bottom,
+        red, orange , yellow, green, cyan, blue, purple
+    ); */
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    border-radius: 40%;
+    background-image: linear-gradient(
+        to bottom,
+        red,
+        orange,
+        yellow,
+        green,
+        cyan,
+        blue,
+        purple
+    );
 }
 
 /* || ***** GENERAL STYLES ******/
@@ -55,7 +83,9 @@ h3 {
     font-size: 32px;
 }
 
-p, input, textarea {
+p,
+input,
+textarea {
     font-size: 30px;
 }
 
@@ -67,7 +97,7 @@ button,
 .icon,
 label,
 .logo-small {
-    -webkit-transition-duration: 0.4s; /* Safari */
+    -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
 
@@ -128,7 +158,7 @@ a:focus {
 }
 
 button,
-.btn  {
+.btn {
     background-color: powderblue;
     color: rgb(2, 17, 56);
     font-size: 27px;
@@ -147,8 +177,6 @@ button,
 }
 
 button:focus,
-button:hover,
-.btn:hover,
 .btn:focus {
     outline: none;
 }
@@ -165,7 +193,7 @@ button:hover,
     color: powderblue;
 }
 
-.upload-btn:focus .icon ,
+.upload-btn:focus .icon,
 .upload-btn:hover .icon {
     /* background: rgb(2, 17, 56); */
     stroke: powderblue;
@@ -248,11 +276,21 @@ header {
     color: rgb(2, 17, 56);
 }
 
-.nav a:hover,
+.nav a:hover {
+    transform: translateY(-3px);
+    /* border-top-color: rgb(2, 17, 56); */
+    border-bottom-color: rgb(2, 17, 56);
+}
+
 .nav a:focus {
     transform: translateY(-3px);
-    border-bottom: 4px dotted rgb(2, 17, 56);
+    border-top-color: rgb(2, 17, 56);
+    border-bottom-color: rgb(2, 17, 56);
 }
+
+/* .nav a:active {
+    border-top-color: rgb(2, 17, 56);
+} */
 
 .logo-small {
     height: 80px;
@@ -423,6 +461,11 @@ textarea.edit-bio {
     margin-right: 15px;
 }
 
+.friends-wannabes .other-user:hover .profile-pic {
+    transform: translateX(0);
+    transform: scale(1.1);
+}
+
 .name-btn-box {
     display: flex;
     flex-direction: column;
@@ -550,8 +593,15 @@ textarea.new-message {
     /* border-radius: 0px 0px 0px 10px; */
     border-radius: unset;
     padding: 6px;
-    border-bottom: 4px dotted rgb(2, 17, 56);
+    border-bottom: 4px dotted powderblue;
     background-color: hsl(186, 51%, 95%);
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+textarea.new-message:focus {
+    outline: none;
+    border-bottom: 4px dotted rgb(2, 17, 56);
 }
 
 .message {
@@ -559,7 +609,6 @@ textarea.new-message {
     font-size: 30px;
     margin-bottom: 6px;
 }
-
 
 .name-date-msg-box {
     margin-left: 10px;
