@@ -42,7 +42,12 @@ exports.getUserById = function(id) {
 exports.findUsers = function(searchFor) {
     return db
         .query(
-            `SELECT * FROM users WHERE first ILIKE $1 OR last ILIKE $1 OR CONCAT(first, ' ', last) ILIKE $1 ORDER BY id LIMIT 4`,
+            `SELECT * FROM users
+            WHERE first ILIKE $1
+            OR last ILIKE $1
+            OR CONCAT(first, ' ', last) ILIKE $1
+            ORDER BY id
+            LIMIT 6`,
             [searchFor + '%'])
         .then(({ rows }) => rows);
 };
