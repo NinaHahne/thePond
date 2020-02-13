@@ -22,9 +22,9 @@ export default class ResetPassword extends React.Component {
                 <div className="reset">
                     <h2>Reset Password</h2>
                     {this.state.error && <div className="error">Oops!</div>}
-                    <input name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
+                    <input className="input" name="email" placeholder="email" onChange={e => this.handleChange(e)}/>
                     <button onClick={e => this.submit(e)}>submit</button>
-                    <p>Actually remembering your password? <Link to="/login">log in</Link></p>
+                    <p>Actually remembering your password? <Link className="link" to="/login">log in</Link></p>
                 </div>
             );
         } else if (this.state.step == "verify") {
@@ -32,8 +32,8 @@ export default class ResetPassword extends React.Component {
                 <div className="reset">
                     <h2>Reset Password</h2>
                     {this.state.error && <div className="error">Oops!</div>}
-                    <input key="code" name="code" placeholder="code" onChange={e => this.handleChange(e)}/>
-                    <input type="password" name="password" placeholder="new password" onChange={e => this.handleChange(e)}/>
+                    <input className="input" key="code" name="code" placeholder="code" onChange={e => this.handleChange(e)}/>
+                    <input className="input" type="password" name="password" placeholder="new password" onChange={e => this.handleChange(e)}/>
                     <button onClick={(e) => this.submit(e)}>submit</button>
                 </div>
             );
@@ -42,7 +42,7 @@ export default class ResetPassword extends React.Component {
                 <div className="reset">
                     <h2>Reset Password</h2>
                     <p>Success!</p>
-                    <p>You can now <Link to="/login">log in</Link> with your new password</p>
+                    <p>You can now <Link className="link" to="/login">log in</Link> with your new password</p>
                 </div>
             );
         }

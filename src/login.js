@@ -19,8 +19,8 @@ export default function Login() {
             <input className="input" type="password" name="password" placeholder="password" onChange={e => handleChange(e)}/>
             <button onClick={e => handleSubmit(e)}>hop in</button>
 
-            <p>Not a member yet? <Link to="/">register</Link> </p>
-            <p>Forgot your password? <Link to="/reset">Reset password</Link> </p>
+            <p>Not a member yet? <Link className="link" to="/">register</Link> </p>
+            <p>Forgot your password? <Link className="link" to="/reset">Reset password</Link> </p>
 
         </div>
     );
