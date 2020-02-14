@@ -12,12 +12,17 @@ export default function Login() {
     const [values, handleChange] = useStatefulFields();
     const [error, handleSubmit] = useAuthSubmit('/login', values);
 
+    // const soundHopIn = new Audio("/sounds/364700__alegemaate__water-splash.wav");
+
     return (
         <div className="login">
             {error && <div className="error">Oops! Please try again!</div>}
             <input className="input" name="email" placeholder="email" onChange={e => handleChange(e)}/>
             <input className="input" type="password" name="password" placeholder="password" onChange={e => handleChange(e)}/>
-            <button onClick={e => handleSubmit(e)}>hop in</button>
+            <button onClick={e => {
+                handleSubmit(e);
+                // soundHopIn.play();
+            }}>hop in</button>
 
             <p>Not a member yet? <Link className="link" to="/">register</Link> </p>
             <p>Forgot your password? <Link className="link" to="/reset">Reset password</Link> </p>

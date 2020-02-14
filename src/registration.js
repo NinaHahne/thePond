@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 export default class Registration extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            soundHopIn: new Audio("/sounds/364700__alegemaate__water-splash.wav")
+        };
     }
     handleChange(e) {
         // this[e.target.name] = e.target.value;
@@ -25,6 +27,7 @@ export default class Registration extends React.Component {
         }).then(({data}) => {
             if (data.success) {
                 // it worked
+                this.state.soundHopIn.play();
                 location.replace('/');
             } else {
                 // failure!

@@ -12,7 +12,7 @@ import Friends from "./friends";
 import {Chat} from './chat';
 
 // for socket.io:
-import * as io from 'socket.io-client';
+// import * as io from 'socket.io-client';
 
 export default class App extends React.Component {
     constructor(props) {

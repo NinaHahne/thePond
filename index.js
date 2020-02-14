@@ -654,11 +654,11 @@ io.on("connection", function(socket) {
                     .then(data => {
                         // console.log("data after getLastChatMessage: ", data);
                         let newMessage = formatDateFromNewMessage(data[0]);
-                        // also send back userId of sender just in case...
-                        let messageData = {
-                            ...newMessage,
-                            senderId: userId
-                        };
+                        // also send back userId of sender just in case...?
+                        // let messageData = {
+                        //     ...newMessage,
+                        //     senderId: userId
+                        // };
                         // console.log('here is a new message from userId ', messageData.senderId, ':', newMessage.msg);
                         io.sockets.emit("chatMessage", newMessage);
                     })
