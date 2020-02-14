@@ -10,7 +10,9 @@ export function useAuthSubmit(url, values) {
             .post(url, values)
             .then(({ data }) => {
                 if (data.success) {
-                    // const soundHopIn = new Audio("/sounds/364700__alegemaate__water-splash.wav");
+                    // const soundHopIn = new Audio("../../public/sounds/364700__alegemaate__water-splash.wav");
+                    // soundHopIn.play();
+                    // setTimeout(location.replace("/"), 500);
                     // soundHopIn.play();
                     location.replace("/");
                 } else {

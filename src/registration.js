@@ -19,6 +19,7 @@ export default class Registration extends React.Component {
     }
     submit(e) {
         e.preventDefault();
+        this.state.soundHopIn.play();
         axios.post('/register', {
             first: this.state.first,
             last: this.state.last,
@@ -27,7 +28,7 @@ export default class Registration extends React.Component {
         }).then(({data}) => {
             if (data.success) {
                 // it worked
-                this.state.soundHopIn.play();
+                // this.state.soundHopIn.play();
                 location.replace('/');
             } else {
                 // failure!

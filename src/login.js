@@ -12,7 +12,11 @@ export default function Login() {
     const [values, handleChange] = useStatefulFields();
     const [error, handleSubmit] = useAuthSubmit('/login', values);
 
-    // const soundHopIn = new Audio("/sounds/364700__alegemaate__water-splash.wav");
+    // const loginWithSound = (e) => {
+    //     const soundHopIn = new Audio("/sounds/364700__alegemaate__water-splash.wav");
+    //     handleSubmit(soudHopIn);
+    //     soundHopIn.play();
+    // };
 
     return (
         <div className="login">
@@ -20,6 +24,7 @@ export default function Login() {
             <input className="input" name="email" placeholder="email" onChange={e => handleChange(e)}/>
             <input className="input" type="password" name="password" placeholder="password" onChange={e => handleChange(e)}/>
             <button onClick={e => {
+                // loginWithSound(e);
                 handleSubmit(e);
                 // soundHopIn.play();
             }}>hop in</button>
