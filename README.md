@@ -1,12 +1,11 @@
 # thePond - social network
 React based authenticated social network featuring
 friending and chat functionality
-:frog: :fish: :octopus:
 
 ## Features
-:frog: Connect with users
-:frog: chat with other users online
-:frog: modify profile information
+:octopus: Connect with users
+:frog: Chat with other users online
+:fish: Modify profile information
 
 ## Technologies
 HTML5, CSS3, JavaScript, React, Node.js/Express,
