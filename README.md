@@ -16,6 +16,9 @@ PostgreSQL, AWS, Socket.IO
 
 <img src="./public/preview/thePond_register.gif" alt="register preview animation">
 
-### CHANGE PROFILE PICTURE
+### CHANGE PROFILE PICTURE / MODIFY PROFILE information
+
+<img src="./public/preview/thePond_update-profile.gif" alt="update profile preview animation">
+
 ### FIND OTHER USERS / MAKE FRIENDS
 ### ONLINE CHAT / SEE WHO'S ONLINE
