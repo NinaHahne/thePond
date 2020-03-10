@@ -21,4 +21,13 @@ PostgreSQL, AWS, Socket.IO
 <img src="./public/preview/thePond_update-profile.gif" alt="update profile preview animation">
 
 ### FIND OTHER USERS / MAKE FRIENDS
+
+<img src="./public/preview/thePond_find-users.gif" alt="find users preview animation">
+
 ### ONLINE CHAT / SEE WHO'S ONLINE
+
+<img src="./public/preview/thePond_chat.gif" alt="chat preview animation">
+
+### MANAGE FRIENDS
+
+<img src="./public/preview/thePond_friends.gif" alt="friends preview animation">
