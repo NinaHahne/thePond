@@ -146,7 +146,7 @@ app.get("/user", (req, res) => {
                 userId: rows[0].id,
                 first: rows[0].first,
                 last: rows[0].last,
-                imageUrl: rows[0].img_url || "/images/duck-308733.svg",
+                imageUrl: rows[0].img_url || "/images/duck-308733.png",
                 bio: rows[0].bio || ""
             });
         })
@@ -167,7 +167,7 @@ app.get("/api/user/:id", (req, res) => {
                 userId: rows[0].id,
                 first: rows[0].first,
                 last: rows[0].last,
-                imageUrl: rows[0].img_url || "/images/duck-308733.svg",
+                imageUrl: rows[0].img_url || "/images/duck-308733.png",
                 bio: rows[0].bio || ""
             });
         })

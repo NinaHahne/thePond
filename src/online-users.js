@@ -29,7 +29,7 @@ export default function OnlineUsers() {
                         <Link to={`/user/${user.id}`} key={user.id}>
                             <div className="other-user" key={user.id}>
                                 <div className="profile-pic">
-                                    <img src={user.img_url || '/images/duck-308733.svg'} alt={`picture of ${user.first} ${user.last}`}></img>
+                                    <img src={user.img_url || '/images/duck-308733.png'} alt={`picture of ${user.first} ${user.last}`}></img>
                                 </div>
                                 <div >{user.first} {user.last}</div>
                             </div>
@@ -41,7 +41,7 @@ export default function OnlineUsers() {
                     //             <img
                     //                 src={
                     //                     user.img_url ||
-                    //                     "/images/duck-308733.svg"
+                    //                     "/images/duck-308733.png"
                     //                 }
                     //                 alt={`picture of ${user.first} ${user.last}`}
                     //             ></img>

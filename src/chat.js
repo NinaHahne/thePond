@@ -61,7 +61,7 @@ export function Chat() {
                                 <div className="profile-pic">
                                     <Link to={`/user/${message.user_id}`}>
                                         <img
-                                            src={message.img_url || "/images/duck-308733.svg"}
+                                            src={message.img_url || "/images/duck-308733.png"}
                                             alt={`picture of ${message.first} ${message.last}`}
                                         ></img>
                                     </Link>

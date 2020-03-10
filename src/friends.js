@@ -41,7 +41,7 @@ export default function Friends(props) {
                                 <Link to={`/user/${wannabe.id}`}>
                                     <div className="profile-pic">
                                         <img
-                                            src={wannabe.img_url || "/images/duck-308733.svg"}
+                                            src={wannabe.img_url || "/images/duck-308733.png"}
                                             alt={`picture of ${wannabe.first} ${wannabe.last}`}
                                         ></img>
                                     </div>
@@ -85,7 +85,7 @@ export default function Friends(props) {
                                 <Link to={`/user/${friend.id}`}>
                                     <div className="profile-pic">
                                         <img
-                                            src={friend.img_url || "/images/duck-308733.svg"}
+                                            src={friend.img_url || "/images/duck-308733.png"}
                                             alt={`picture of ${friend.first} ${friend.last}`}
                                         ></img>
                                     </div>

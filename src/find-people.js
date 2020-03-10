@@ -135,7 +135,7 @@ export default function FindPeople(props) {
                                             <img
                                                 src={
                                                     user.img_url ||
-                                                    "/images/duck-308733.svg"
+                                                    "/images/duck-308733.png"
                                                 }
                                                 alt={`picture of ${user.first} ${user.last}`}
                                             ></img>
@@ -171,7 +171,7 @@ export default function FindPeople(props) {
                                                 <img
                                                     src={
                                                         user.img_url ||
-                                                        "/images/duck-308733.svg"
+                                                        "/images/duck-308733.png"
                                                     }
                                                     alt={`picture of ${user.first} ${user.last}`}
                                                 ></img>
@@ -207,7 +207,7 @@ export default function FindPeople(props) {
                                                 <img
                                                     src={
                                                         user.img_url ||
-                                                        "/images/duck-308733.svg"
+                                                        "/images/duck-308733.png"
                                                     }
                                                     alt={`picture of ${user.first} ${user.last}`}
                                                 ></img>
