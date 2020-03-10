@@ -13,6 +13,9 @@ PostgreSQL, AWS, Socket.IO
 
 ## Preview
 ### REGISTER / LOGIN
+
+<img src="./public/preview/thePond_register.gif" alt="register preview animation">
+
 ### CHANGE PROFILE PICTURE
 ### FIND OTHER USERS / MAKE FRIENDS
 ### ONLINE CHAT / SEE WHO'S ONLINE
